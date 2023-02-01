@@ -1,0 +1,18 @@
+.payment-card {
+  padding: 10px 50px;
+}
+
+.payment-img {
+  position: relative;
+}
+
+.payment-delete {
+  position: absolute;
+  left: 160px;
+  top: 245px;
+  color: rgb(204, 44, 44);
+}
+
+.count:hover {
+  background-color: rgba(53, 151, 64, 0.08);
+}

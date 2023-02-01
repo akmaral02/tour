@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
 import AuthPage from "./pages/AuthPage";
+import BlogPage from "./pages/BlogPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import EditFlowerPage from "./pages/EditFlowerPage";
 import FlowerDetailPage from "./pages/FlowerDetailPage";
@@ -19,6 +20,7 @@ const MainRoutes = () => {
     { link: "/contactus", element: <ContactUsPage />, id: 5 },
     { link: "/myplants", element: <MyplantsPage />, id: 6 },
     { link: "*", element: <NotFoundPage />, id: 7 },
+    { link: "/blog", element: <BlogPage />, id: 8 },
   ];
 
   const PrivateRoutes = [

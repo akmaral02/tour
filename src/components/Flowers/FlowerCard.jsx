@@ -261,4 +261,4 @@ const FlowerCard = ({ flower, id }) => {
   );
 };
 
-export default FlowerCard;
+// export default FlowerCard;
