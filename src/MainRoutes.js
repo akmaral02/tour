@@ -24,6 +24,7 @@ const MainRoutes = () => {
   ];
 
   const PrivateRoutes = [
+    { link: "/admin", element: <AdminPage />, id: 8 },
     { link: "/edit/:id", element: <EditFlowerPage />, id: 9 },
   ];
   return (
@@ -32,9 +33,9 @@ const MainRoutes = () => {
         <Route path={item.link} element={item.element} key={item.id} />
       ))}
 
-      {/* {PrivateRoutes.map((item) => (
+      {PrivateRoutes.map((item) => (
         <Route path={item.link} element={item.element} key={item.id} />
-      ))} */}
+      ))}
     </Routes>
   );
 };

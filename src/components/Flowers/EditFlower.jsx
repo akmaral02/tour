@@ -1,7 +1,7 @@
 import React from "react";
 
 const EditFlower = () => {
-  return <div></div>;
+  return <div>EditFlower</div>;
 };
 
 export default EditFlower;

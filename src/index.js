@@ -3,12 +3,18 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import FlowerContextProvider from "./contexts/FlowerContextProvider";
+import MyPlantsContextProvider from "./contexts/MyPlantsContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <MyPlantsContextProvider>
+        <FlowerContextProvider>
+          <App />
+        </FlowerContextProvider>
+      </MyPlantsContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
