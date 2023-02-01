@@ -1,7 +1,7 @@
 import React from "react";
 
 const FlowerDetails = () => {
-  return <div></div>;
+  return <div>FlowerDetail</div>;
 };
 
 export default FlowerDetails;

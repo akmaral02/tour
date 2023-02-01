@@ -1,7 +1,7 @@
 import React from "react";
 
 const MyPlants = () => {
-  return <div></div>;
+  return <div>MyPlants</div>;
 };
 
 export default MyPlants;
