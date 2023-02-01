@@ -17,16 +17,19 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/system";
 import { Block } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
+import "./navbar.css";
+import Logo from "../images/logo.png";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { ICON_COLOR, MAIN_COLOR } from "../../helpers/consts";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-
   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  //   "&:hover": {
-  //     backgroundColor: alpha(theme.palette.common.white, 0.25),
-  //   },
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -34,6 +37,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+  color: `${MAIN_COLOR}`,
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -44,10 +48,10 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: `${MAIN_COLOR}`,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -57,6 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+    color: `${MAIN_COLOR}`,
   },
 }));
 
@@ -127,142 +132,140 @@ export default function Header() {
         open={isMobileMenuOpen}
         onClose={handleMobileMenuClose}
       >
-        {/* <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
-            <Badge badgeContent={4} color="error">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <Badge badgeContent={17} color="error">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={handleProfileMenuOpen}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem> */}
-
-        <MenuItem>About</MenuItem>
-        <MenuItem>Home</MenuItem>
+        <MenuItem>HOME</MenuItem>
+        <MenuItem>FLOWERS</MenuItem>
+        <MenuItem>CONTACT US</MenuItem>
+        <MenuItem>BLOG</MenuItem>
+        <MenuItem>ADMIN</MenuItem>
       </Menu>
     );
 
   return (
     <div className="cont">
-      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          flexGrow: 12,
+          marginBottom: 15,
+
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <AppBar
-          position="static"
+          position="fixed"
           sx={{
-            backgroundColor: "transparent",
-            boxShadow: "none",
+            backgroundColor: "white",
+            boxShadow: "3px 3px 7px #ccc",
           }}
         >
           <Toolbar>
-            <IconButton
-              onClick={handleMobileMenuOpen}
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2, display: { xs: "flex", md: "none", lg: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+            <Box flexGrow={8} display="flex" alignItems="center">
+              <IconButton
+                onClick={handleMobileMenuOpen}
+                size="large"
+                edge="start"
+                color={`${MAIN_COLOR}`}
+                aria-label="open drawer"
+                sx={{ mr: 2, display: { xs: "flex", md: "none", lg: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Box
+                component="img"
+                sx={{
+                  height: 64,
+                }}
+                alt="logo"
+                src={Logo}
+                color={`${MAIN_COLOR}`}
+              ></Box>
+              <Box>
+                <Typography color={`${ICON_COLOR}`}>
+                  ALKI | Art of Plants
+                </Typography>
+              </Box>
+            </Box>
             <Box
+              flexGrow={8}
               sx={{
-                flexGrow: 0,
                 display: "flex",
+                justifyContent: "center",
                 columnGap: 2,
                 display: { xs: "none", sm: "none", md: "flex", lg: "flex" },
+                color: `${MAIN_COLOR}`,
               }}
             >
-              <Typography>ABOUT</Typography>
-              <Typography>CONTACTS</Typography>
+              <MenuItem className="nav">
+                <Link to="/"></Link> HOME
+              </MenuItem>
+              <MenuItem className="nav">FLOWERS</MenuItem>
+              <MenuItem className="nav">CONTACT US</MenuItem>
+              <MenuItem className="nav">BLOG</MenuItem>
+              <MenuItem className="nav">ADMIN</MenuItem>
             </Box>
 
             <Box
+              flexGrow={1}
               sx={{
-                flexGrow: 0.5,
-                display: {
-                  lg: { flexGrow: 3.8 },
-                  md: { flexGrow: 2 },
-                  sm: { flexGrow: 0.1 },
-                },
+                display: "flex",
+                alignItems: "center",
+                // justifyContent: "space-evenly",
+                // display: {
+                //   lg: { flexGrow: 3.8 },
+                //   md: { flexGrow: 2 },
+                //   sm: { flexGrow: 0.1 },
+                // },
               }}
             >
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{
-                  display: { xs: "none", sm: "block" },
-                  letterSpacing: 10,
-                }}
-              >
-                DELMAR
-              </Typography>
-            </Box>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  sx={{
+                    border: 0.1,
+                    color: "#EFEFEF",
+                    borderRadius: 50,
+                    ":hover": {
+                      color: `${ICON_COLOR}`,
+                      transition: "1s",
+                      boxShadow: "5px 5px 10px #ccc",
+                    },
+                  }}
+                />
+              </Search>
 
-            <Box sx={{ flexGrow: 1 }} />
-            <Box>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "white",
-                  borderColor: "white",
-                  flexGrow: 1,
-                  mr: 5,
-                }}
-              >
-                Reserve
-              </Button>
-            </Box>
-
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              }
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                {
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                  >
+                    <ShoppingCartOutlinedIcon sx={{ color: `${ICON_COLOR}` }} />
+                  </IconButton>
+                }
+              </Box>
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                {
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                  >
+                    <AccountCircle sx={{ color: `${ICON_COLOR}` }} />
+                  </IconButton>
+                }
+              </Box>
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -271,7 +274,7 @@ export default function Header() {
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
-                color="inherit"
+                color={`${MAIN_COLOR}`}
               >
                 <MoreIcon />
               </IconButton>
@@ -280,7 +283,6 @@ export default function Header() {
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-        <hr></hr>
       </Box>
     </div>
   );

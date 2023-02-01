@@ -1,0 +1,27 @@
+.category {
+  width: auto;
+  border: solid 2px #efefef;
+  border-radius: 8px;
+  text-transform: capitalize;
+  padding: 20px 40px;
+  align-items: center;
+  /* color: #70737c; */
+}
+.category:hover {
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  background-color: #f2f8f9;
+  color: #1f2533;
+  font-size: large;
+}
+
+.category::before {
+  content: "";
+  transform: scale(2);
+  transform-origin: 50% 50%;
+  transition: transform 0.15s ease-out;
+}
+
+.category:hover::before {
+  transform: scale(2.15);
+}

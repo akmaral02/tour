@@ -1,0 +1,47 @@
+.flower-card {
+  border: solid 2px #efefef;
+  padding: 10px;
+}
+
+.flower-img {
+  height: 390px;
+  position: relative;
+}
+
+.flower-card:hover {
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+}
+
+.card-like {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  margin: 15px;
+  padding: 5px;
+  border: solid 2px #efefef;
+  color: #ffcf55;
+}
+
+.add-to-cart {
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.card-hover {
+  width: 150px;
+  height: 50px;
+  opacity: 1.2;
+  position: absolute;
+  top: 320px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 0px 10px 10px 0px;
+  display: none;
+}
+
+.flower-card:hover .card-hover {
+  /* transition: 5s; */
+  display: block;
+}

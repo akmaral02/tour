@@ -1,0 +1,27 @@
+.nav {
+  position: relative;
+  color: #0087ca;
+}
+
+.nav:hover {
+  color: #284853;
+  background-color: white !important;
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #284853;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
