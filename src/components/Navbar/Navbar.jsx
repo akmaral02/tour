@@ -149,7 +149,7 @@ export default function Header() {
       <Link className="links" to="/myplants">
         <MenuItem className="nav">MY PLANTS</MenuItem>
       </Link>
-      {user.email === "admin@admin" ? (
+      {user.email === "admin@admin.com" ? (
         <Link className="links" to="/admin">
           <MenuItem className="nav">ADMIN</MenuItem>
         </Link>
@@ -237,7 +237,7 @@ export default function Header() {
               <Link className="links" to="/myplants">
                 <MenuItem className="nav">MY PLANTS</MenuItem>
               </Link>
-              {user.email === "bekmyrza@gmail.com" ? (
+              {user.email === "admin@admin.com" ? (
                 <Link className="links" to="/admin">
                   <MenuItem className="nav">ADMIN</MenuItem>
                 </Link>
