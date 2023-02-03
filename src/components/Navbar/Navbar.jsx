@@ -22,6 +22,9 @@ import "./navbar.css";
 import Logo from "../images/logo.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { ICON_COLOR, MAIN_COLOR } from "../../helpers/consts";
+import { NavLink, useNavigate } from "react-router-dom";
+// import Auth from "././contexts/AuthContextProvider";
+import { useAuth } from "../../contexts/AuthContextProvider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -88,6 +91,10 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget); // меняет состояние на текущую
   };
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+
   const menuId = "primary-search-account-menu"; //сохраняем Id профиля иконка
   const renderMenu = //для отображения составной части профиля иконка как я поняла это функция которая в последующем вызывается
     (
@@ -110,7 +117,13 @@ export default function Header() {
       >
         {/* это состовные тексты при их нажатии вызывается функ. которая закрывает их  */}
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        {user.email === true ? (
+          <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
+        ) : (
+          <MenuItem onClick={() => navigate("/auth")}>
+            <Link to="/auth">Sign in</Link>
+          </MenuItem>
+        )}
       </Menu>
     );
 
@@ -134,7 +147,7 @@ export default function Header() {
       >
         <MenuItem>HOME</MenuItem>
         <MenuItem>FLOWERS</MenuItem>
-        <MenuItem>CONTACT US</MenuItem>
+        <MenuItem onClick={() => navigate("/contactus")}>CONTACT US</MenuItem>
         <MenuItem>BLOG</MenuItem>
         <MenuItem>ADMIN</MenuItem>
       </Menu>
@@ -193,16 +206,62 @@ export default function Header() {
                 justifyContent: "center",
                 columnGap: 2,
                 display: { xs: "none", sm: "none", md: "flex", lg: "flex" },
-                color: `${MAIN_COLOR}`,
+                // color: `${MAIN_COLOR}`,
+                color: "#284853",
               }}
             >
-              <MenuItem className="nav">
-                <Link to="/"></Link> HOME
+              <MenuItem className="nav" onClick={() => navigate("/")}>
+                HOME
               </MenuItem>
-              <MenuItem className="nav">FLOWERS</MenuItem>
-              <MenuItem className="nav">CONTACT US</MenuItem>
-              <MenuItem className="nav">BLOG</MenuItem>
-              <MenuItem className="nav">ADMIN</MenuItem>
+              <MenuItem className="nav" onClick={() => navigate("/flowers")}>
+                FLOWERS
+              </MenuItem>
+              <MenuItem className="nav" onClick={() => navigate("/contactus")}>
+                {" "}
+                CONTACT US
+              </MenuItem>
+              <MenuItem className="nav" onClick={() => navigate("/contactus")}>
+                <Link>CONTACT US</Link>
+              </MenuItem>
+
+              {user.email === "admin@gmail.com" ? (
+                <MenuItem>
+                  <NavLink
+                    to="/admin"
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "15px",
+                        ml: "auto",
+                        my: 2,
+                        color: "#284853",
+                        display: "block",
+                      }}
+                    >
+                      ADMIN
+                    </Typography>
+                  </NavLink>
+                </MenuItem>
+              ) : (
+                <MenuItem>
+                  <Link to="/flowers">
+                    <Typography
+                      sx={{
+                        ml: "auto",
+                        my: 2,
+                        color: "black",
+                        display: "block",
+                        textDecoration: "none",
+                      }}
+                    >
+                      BLOG
+                    </Typography>
+                  </Link>
+                </MenuItem>
+              )}
             </Box>
 
             <Box

@@ -1,3 +1,4 @@
+import List from "./ims/List.png";
 import React from "react";
 import { LockOutlined } from "@mui/icons-material";
 import {
@@ -16,6 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useAuth } from "../../contexts/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
+import list from "./ims/list.jpg";
+import "./Auth.css";
 
 const theme = createTheme();
 
@@ -37,12 +40,29 @@ const Auth = () => {
     handleLogOut,
   } = useAuth();
 
+  let setBlack = (e) => {
+    if (e.target.style.borderColor === "blue")
+      e.target.style.borderColor = "black";
+  };
+
   const navigate = useNavigate();
   return (
-    <div className="auth">
-      <ThemeProvider className="leftSide">cfdji</ThemeProvider>
-      <ThemeProvider theme={theme} className="rigtSide">
-        <Container component="main" maxWidth="xs">
+    <div className="auz">
+      <Container className="leftSide">
+        <img
+          className="image"
+          src={list}
+          style={{ width: "100%", height: "50%" }}
+        />
+        <h1 className="welcome image">Welcome to the ALKI</h1>
+        <h3 className="welcome-1 image">Art of Plants</h3>
+      </Container>
+      <ThemeProvider theme={theme} className="rightSide">
+        <Container
+          // component="main"
+          maxWidth="xs"
+          style={{ marginTop: "-6%", marginRight: "6%" }}
+        >
           <CssBaseline />
           <Box
             sx={{
@@ -52,10 +72,22 @@ const Auth = () => {
               alignItems: "center",
             }}
           >
-            <Avatar>
-              <LockOutlined />
-            </Avatar>
-            <Typography>Sign in</Typography>
+            <Box>
+              <img src={List} alt="create" />
+              <Box style={{ color: "#284853" }}>
+                {hasAccount ? (
+                  <Box className="">
+                    <h3>Welcome</h3>
+                    <p>Login to continue!</p>
+                  </Box>
+                ) : (
+                  <Box className="create">
+                    <h3>Create account</h3>
+                    <p>Register to get started!</p>
+                  </Box>
+                )}
+              </Box>
+            </Box>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -63,7 +95,8 @@ const Auth = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                // label="Email Address"
+                placeholder="email address"
                 name="email"
                 value={email}
                 helperText={emailError}
@@ -72,6 +105,13 @@ const Auth = () => {
                 }}
                 autoComplete="email"
                 autoFocus
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: "#284853",
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -79,7 +119,8 @@ const Auth = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                // label="Password"
+                placeholder="password"
                 type="password"
                 id="password"
                 value={password}
@@ -88,9 +129,21 @@ const Auth = () => {
                   setPassword(e.target.value);
                 }}
                 autoComplete="current-password"
+                onClick={setBlack}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: "#284853",
+                    },
+                  },
+                }}
+                variant="outlined"
               />
+
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
+                // sx={{ color: "#284853" }}
+                style={{ color: "black" }}
                 label="Remember me"
               />
 
@@ -99,7 +152,15 @@ const Auth = () => {
                   <Button
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2, backgroundColor: "green" }}
+                    sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
+                    // sx={{
+                    //   width: { sm: 250, md: 350 },
+                    //   "& .MuiOutlinedInput-root:hover": {
+                    //     "& > fieldset": {
+                    //       borderColor: "orange",
+                    //     },
+                    //   },
+                    // }}
                     onClick={handleSignin}
                   >
                     Sign In
@@ -109,7 +170,7 @@ const Auth = () => {
                 <Button
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2, backgroundColor: "royalBlue" }}
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
                   onClick={handleSignUp}
                 >
                   Sign Up
@@ -128,6 +189,7 @@ const Auth = () => {
                       href="#"
                       variant="body2"
                       onClick={() => setHasAccount(!hasAccount)}
+                      style={{ color: "black", textDecoration: "none" }}
                     >
                       Don't have an account? Sign Up.
                     </Link>
@@ -136,6 +198,7 @@ const Auth = () => {
                       href="#"
                       variant="body2"
                       onClick={() => setHasAccount(!hasAccount)}
+                      style={{ color: "black", textDecoration: "none" }}
                     >
                       Have an account? Sign In.
                     </Link>

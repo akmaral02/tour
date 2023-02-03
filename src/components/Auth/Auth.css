@@ -1,0 +1,55 @@
+.auz {
+  display: flex;
+  margin-top: -5%;
+  margin-left: -10%;
+  /* height: 800px; */
+}
+
+/* .leftside {
+  width: 40%;
+  height: 50%;
+  height: 800px;
+  overflow: auto;
+  float: left;
+} */
+.rightSide {
+  width: 40%;
+  /* height: 800px; */
+  overflow: auto;
+  margin-right: 20% !important;
+  /* margin-top: 50% !important; */
+}
+
+.welcome {
+  margin-top: -49%;
+  margin-left: 40%;
+  color: #284853;
+}
+.welcome-1 {
+  /* margin-top: -49%; */
+  margin-left: 40%;
+  color: #284853;
+}
+
+.image {
+  display: block;
+}
+
+@media all and (max-width: 1000px) {
+  .image {
+    display: none;
+  }
+  .rightSide {
+    /* margin-left: 200px; */
+  }
+}
+@media all and (max-width: 768px) {
+  .rightSide {
+    margin-right: 70%;
+  }
+}
+@media all and (max-width: 600px) {
+  .rightSide {
+    margin-right: 20%;
+  }
+}

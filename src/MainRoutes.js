@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
 import AuthPage from "./pages/AuthPage";
 import BlogPage from "./pages/BlogPage";
@@ -10,8 +10,12 @@ import FlowersPage from "./pages/FlowersPage";
 import HomePage from "./pages/HomePage";
 import MyplantsPage from "./pages/MyplantsPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { useAuth } from "./contexts/AuthContextProvider";
 
 const MainRoutes = () => {
+  // const { user } = useAuth();
+
+  const { user } = useAuth();
   const PublicRoutes = [
     { link: "/", element: <HomePage />, id: 1 },
     { link: "/auth", element: <AuthPage />, id: 2 },
@@ -33,9 +37,21 @@ const MainRoutes = () => {
         <Route path={item.link} element={item.element} key={item.id} />
       ))}
 
-      {PrivateRoutes.map((item) => (
-        <Route path={item.link} element={item.element} key={item.id} />
-      ))}
+      {user
+        ? PrivateRoutes.map((item) => (
+            <Route
+              path={item.link}
+              element={
+                user.email === "admin@gmail.com" ? (
+                  item.element
+                ) : (
+                  <Navigate replace to="*" />
+                )
+              }
+              key={item.id}
+            />
+          ))
+        : null}
     </Routes>
   );
 };
