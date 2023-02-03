@@ -12,11 +12,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <MyPlantsContextProvider>
-        <FlowerContextProvider>
-          <AuthContextProvider>
+        <AuthContextProvider>
+          <FlowerContextProvider>
             <App />
-          </AuthContextProvider>
-        </FlowerContextProvider>
+          </FlowerContextProvider>
+        </AuthContextProvider>
+
       </MyPlantsContextProvider>
     </BrowserRouter>
   </React.StrictMode>

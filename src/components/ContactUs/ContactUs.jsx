@@ -23,6 +23,7 @@ import { ClassNames } from "@emotion/react";
 import { dark } from "@mui/material/styles/createPalette";
 
 const ContactUs = () => {
+
   return (
     <Grid container mt={5}>
       <Grid item xs={12}>
@@ -225,6 +226,7 @@ const ContactUs = () => {
       </Grid>
     </Grid>
   );
+
 };
 
 export default ContactUs;

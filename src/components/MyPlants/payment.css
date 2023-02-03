@@ -8,11 +8,13 @@
 
 .payment-delete {
   position: absolute;
-  left: 160px;
-  top: 245px;
-  color: rgb(204, 44, 44);
+
+  color: black;
 }
 
+.payment-delete :hover {
+  color: rgb(204, 44, 44);
+}
 .count:hover {
   background-color: rgba(53, 151, 64, 0.08);
 }

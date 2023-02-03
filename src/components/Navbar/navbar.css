@@ -1,6 +1,6 @@
 .nav {
   position: relative;
-  color: #0087ca;
+  /* color: #0087ca; */
 }
 
 .nav:hover {
@@ -24,4 +24,12 @@
 .nav:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.links {
+  color: #35454b;
+  text-decoration: none;
+}
+.links :hover {
+  color: #284853;
 }

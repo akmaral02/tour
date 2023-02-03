@@ -17,6 +17,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 // import logo from "../assets/icons/logo.svg";
 
 const Footer = () => {
+
   return (
     <Paper
       sx={{ left: 0, bottom: 0, right: 0, width: "100%" }}
@@ -76,6 +77,7 @@ const Footer = () => {
       </Container>
     </Paper>
   );
+
 };
 
 export default Footer;

@@ -1,24 +1,29 @@
+
 import List from "./ims/List.png";
 import React from "react";
 import { LockOutlined } from "@mui/icons-material";
+
+
 import {
-  Avatar,
+  Box,
   Button,
-  Checkbox,
   Container,
-  CssBaseline,
-  FormControlLabel,
+  FormControl,
   Grid,
-  Link,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box } from "@mui/system";
 import { useAuth } from "../../contexts/AuthContextProvider";
+
 import { useNavigate } from "react-router-dom";
 import list from "./ims/list.jpg";
 import "./Auth.css";
+
 
 const theme = createTheme();
 
@@ -26,19 +31,19 @@ const Auth = () => {
   const {
     email,
     password,
-    user,
+    // user,
 
     emailError,
     passwordError,
-    hasAccount,
+    // hasAccount,
     setEmail,
     setPassword,
-    setHasAccount,
+    // setHasAccount,
 
     handleSignin,
     handleSignUp,
-    handleLogOut,
   } = useAuth();
+
 
   let setBlack = (e) => {
     if (e.target.style.borderColor === "blue")
@@ -147,11 +152,9 @@ const Auth = () => {
                 label="Remember me"
               />
 
-              {hasAccount ? (
-                <Link to="/home">
-                  <Button
-                    fullWidth
-                    variant="contained"
+
+
+
                     sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
                     // sx={{
                     //   width: { sm: 250, md: 350 },
@@ -162,9 +165,8 @@ const Auth = () => {
                     //   },
                     // }}
                     onClick={handleSignin}
-                  >
-                    Sign In
-                  </Button>
+
+
                 </Link>
               ) : (
                 <Button
@@ -207,6 +209,7 @@ const Auth = () => {
               </Grid>
             </Box>
           </Box>
+
         </Container>
       </ThemeProvider>
     </div>
