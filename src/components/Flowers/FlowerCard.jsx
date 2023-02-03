@@ -20,30 +20,28 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import EditIcon from "@mui/icons-material/Edit";
+import { useMyPlants } from "../../contexts/MyPlantsContextProvider";
+import { useAuth } from "../../contexts/AuthContextProvider";
 
 const FlowerCard = ({ flower, id }) => {
-  //  ! get our props and destructuring them
   const { deleteFlower, flowerDetails, saveEditedFlower, getFlowerDetails } =
     useFlower();
+  const { addToMyPlants } = useMyPlants();
+  const { user } = useAuth();
 
-  // console.log(id);
-
-  const [open, setOpen] = React.useState(false); //!its for dialog window
-
-  useEffect(() => {
-    getFlowerDetails(id); //!there we getting one flower and use the props to get exactly this flower what wee want
-    //!before in list we give for every card uniq id
-  }, [open]); //! and it will work only we open the dialog cuse this fialog will open only then when we click on the button in every card
-  //! so  he get which card was opened and which flower he have to get from data
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    setFlowerForEdit(flowerDetails); //! its for update our state after getting data from json and show right data
+    getFlowerDetails(id);
+  }, [open]);
+
+  useEffect(() => {
+    setFlowerForEdit(flowerDetails);
   }, [getFlowerDetails]);
 
-  const [flowerForEdit, setFlowerForEdit] = useState(flowerDetails); //! its state for rendering in our edit inputs the data from one flower
+  const [flowerForEdit, setFlowerForEdit] = useState(flowerDetails);
   const [size, setSize] = useState(flowerDetails.size);
   const [inputValue, setInpValue] = useState("");
 
@@ -133,19 +131,27 @@ const FlowerCard = ({ flower, id }) => {
                 <Typography variant="h5" component="div">
                   {flower.price} EUR
                 </Typography>
-                <Box className="add-to-cart">
-                  <AddShoppingCartOutlinedIcon />
-                </Box>
-                <Box>
-                  <DeleteIcon
-                    onClick={() => {
-                      deleteFlower(flower.id);
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <EditIcon onClick={handleClickOpen} />
-                </Box>
+
+                {user.email === "bekmyrza@gmail.com" ? (
+                  <>
+                    <Box>
+                      <DeleteIcon
+                        onClick={() => {
+                          deleteFlower(flower.id);
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                      <EditIcon onClick={handleClickOpen} />
+                    </Box>
+                  </>
+                ) : (
+                  <Box className="add-to-cart">
+                    <AddShoppingCartOutlinedIcon
+                      onClick={() => addToMyPlants(flower)}
+                    />
+                  </Box>
+                )}
               </Box>
             </Box>
           </CardContent>
@@ -193,7 +199,7 @@ const FlowerCard = ({ flower, id }) => {
               id="outlined-size-normal"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">som</InputAdornment>
+                  <InputAdornment position="end">EUR</InputAdornment>
                 ),
               }}
               onChange={handleChange}
@@ -223,7 +229,6 @@ const FlowerCard = ({ flower, id }) => {
               renderInput={(params) => (
                 <TextField {...params} label="Categories" />
               )}
-              // onChange={handleChange}
             />
             <Autocomplete
               value={flowerForEdit.size}
@@ -239,7 +244,6 @@ const FlowerCard = ({ flower, id }) => {
               options={sizes}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Size" />}
-              // onInputChange={handleChange}
             />
           </Box>
         </Box>
@@ -261,4 +265,4 @@ const FlowerCard = ({ flower, id }) => {
   );
 };
 
-// export default FlowerCard;
+export default FlowerCard;

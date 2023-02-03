@@ -1,6 +1,12 @@
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 
 export const flowerContext = createContext();
@@ -41,7 +47,7 @@ const FlowerContextProvider = ({ children }) => {
   //!function for GET FLOWERS
   const getFlower = async () => {
     try {
-      let res = await axios.get(`${API}`);
+      let res = await axios.get(`${API}${window.location.search}`);
       dispatch({
         type: "getFlower",
         payload: res.data,
@@ -86,9 +92,27 @@ const FlowerContextProvider = ({ children }) => {
     }
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [search, setSearch] = useState(searchParams.get("q") || "");
+
+  useEffect(() => {
+    setSearchParams({
+      q: search,
+    });
+  }, [search]);
+
+  useEffect(() => {
+    getFlower();
+  }, [searchParams]);
+
   let value = {
     flowers: state.flowers,
     flowerDetails: state.flowerDetails,
+    searchParams,
+    setSearchParams,
+    search,
+    setSearch,
     addFlower,
     getFlower,
     getFlowerDetails,

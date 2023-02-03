@@ -1,31 +1,38 @@
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   Divider,
-  FilledInput,
-  Grid,
-  InputAdornment,
-  InputLabel,
   List,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
-import { ButtonGroup, Container, FormControl } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import "../MyPlants/payment.css";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import LoginIcon from "@mui/icons-material/Login";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Modal from "@mui/material/Modal";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import { useMyPlants } from "../../contexts/MyPlantsContextProvider";
+import { Link } from "react-router-dom";
 
 const MyPlants = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const {
+    myplants,
+    getMyPlants,
+    incrementCount,
+    decrementCount,
+    deleteFromMyplants,
+  } = useMyPlants();
+
+  useEffect(() => {
+    getMyPlants();
+  }, []);
 
   return (
     <div>
@@ -38,7 +45,6 @@ const MyPlants = () => {
               alignItems="center"
             >
               <Typography fontSize={24}>PAYMENT</Typography>
-              <Typography fontSize={18}>3 items</Typography>
             </Box>
             <List>
               <Divider color="#EFEFEF" />
@@ -58,105 +64,138 @@ const MyPlants = () => {
                 <Typography width="33%">TOTAL</Typography>
               </Box>
             </Box>
-
-            <Box display="flex">
-              <Box width="45%" display="flex">
-                <Box
-                  className="payment-img"
-                  component="img"
-                  sx={{
-                    height: 80,
-                    width: 80,
-                    borderRadius: 3,
-                  }}
-                  src="https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_money-tree_slate-e1643402075928.jpg?ver=279409"
-                />
-                <Box className="payment-delete">
-                  <CancelOutlinedIcon />
-                </Box>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  marginLeft={2}
-                >
-                  <Typography>Rhea Selvia</Typography>
-                  <Typography>Indoor</Typography>
-                </Box>
-              </Box>
-
-              <Box display="flex" width="55%">
-                <Box
-                  width="33.3%"
-                  display="flex"
-                  justifyContent="space-around"
-                  alignItems="center"
-                  textAlign="center"
-                >
-                  <Box
-                    border={1}
-                    display="flex"
-                    width={200}
-                    borderColor="#EFEFEF"
-                    borderRadius={2}
-                    padding={1}
-                    textAlign="center"
-                    alignItems="center"
-                    color="#359740"
-                  >
-                    <Box className="count" width="33.3%">
-                      -
+            {/* //! start */}
+            {myplants?.flowers.map((everyFlower) => (
+              <div>
+                <Box display="flex">
+                  <Box width="45%" display="flex">
+                    <Box
+                      className="payment-img"
+                      component="img"
+                      sx={{
+                        height: 80,
+                        width: 80,
+                        borderRadius: 3,
+                      }}
+                      src={everyFlower.item.image}
+                    />
+                    <Box
+                      className="payment-delete"
+                      onClick={() => deleteFromMyplants(everyFlower.item.id)}
+                    >
+                      <CancelOutlinedIcon />
                     </Box>
-                    <Typography width="33.3%">2</Typography>
-                    <Box className="count" width="33.3%">
-                      +
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      marginLeft={2}
+                    >
+                      <Typography>{everyFlower.item.title}</Typography>
+                      <Typography>{everyFlower.item.category}</Typography>
                     </Box>
                   </Box>
+                  <Box display="flex" width="55%">
+                    <Box
+                      width="33.3%"
+                      display="flex"
+                      justifyContent="space-around"
+                      alignItems="center"
+                      textAlign="center"
+                    >
+                      <Box
+                        border={1}
+                        display="flex"
+                        width={200}
+                        borderColor="#EFEFEF"
+                        borderRadius={2}
+                        padding={1}
+                        textAlign="center"
+                        alignItems="center"
+                        color="#359740"
+                      >
+                        <Box
+                          className="count"
+                          width="33.3%"
+                          onClick={() => decrementCount(everyFlower.item.id)}
+                        >
+                          -
+                        </Box>
+                        <Typography width="33.3%">
+                          {everyFlower.count}
+                        </Typography>
+                        <Box
+                          className="count"
+                          width="33.3%"
+                          onClick={() => incrementCount(everyFlower.item.id)}
+                        >
+                          +
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Typography
+                      width="33.3%"
+                      display="center"
+                      textAlign="center"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      {everyFlower.item.price}
+                    </Typography>
+                    <Typography
+                      width="33.3%"
+                      display="center"
+                      textAlign="center"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      {everyFlower.subPrice}
+                    </Typography>
+                  </Box>
                 </Box>
+                <Box marginTop={1} marginBottom={1}>
+                  <List>
+                    <Divider color="#EFEFEF" />
+                  </List>
+                </Box>
+              </div>
+            ))}
+            <Box
+              display="flex"
+              justifyContent="end"
+              alignItems="center"
+              columnGap={3}
+            >
+              <span fontSize={18}> Total Price: </span>
+              <Typography fontSize={24}>{myplants?.totalPrice} EUR</Typography>
+            </Box>
+            {/* //!end */}
+            <Link to={"/flowers"} style={{ textDecoration: "none" }}>
+              <Box
+                width="30%"
+                border={1}
+                borderRadius={1}
+                color="#EFEFEF"
+                marginTop={3}
+                alignItems="center"
+                display="flex"
+                justifyContent="center"
+                sx={{
+                  ":hover": {
+                    backgroundColor: "#284853",
+                  },
+                }}
+              >
                 <Typography
-                  width="33.3%"
-                  display="center"
-                  textAlign="center"
-                  justifyContent="center"
-                  alignItems="center"
+                  color="black"
+                  paddingTop={1}
+                  paddingBottom={1}
+                  textDecoration={"none"}
                 >
-                  $399.99
-                </Typography>
-                <Typography
-                  width="33.3%"
-                  display="center"
-                  textAlign="center"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  $399.99
+                  Continue Shopping
                 </Typography>
               </Box>
-            </Box>
-            <Box marginTop={1} marginBottom={1}>
-              <List>
-                <Divider color="#EFEFEF" />
-              </List>
-            </Box>
-            <Box
-              width="30%"
-              border={1}
-              borderRadius={1}
-              color="#EFEFEF"
-              marginTop={3}
-              alignItems="center"
-              display="flex"
-              justifyContent="center"
-              sx={{
-                ":hover": {
-                  backgroundColor: "#284853",
-                },
-              }}
-            >
-              <Typography color="black" paddingTop={1} paddingBottom={1}>
-                Continue Shopping
-              </Typography>
-            </Box>
+            </Link>
           </Box>
 
           <Box width="35%">
@@ -222,20 +261,6 @@ const MyPlants = () => {
                     25 rue Robert Latouche, Nice, 06200, Cote D’azur, France
                   </Typography>
                 </Box>
-                {/* <Box
-                  border={1}
-                  borderRadius={1}
-                  color="#EFEFEF"
-                  marginTop={3}
-                  alignItems="center"
-                  display="flex"
-                  justifyContent="center"
-                  backgroundColor="#284853"
-                >
-                  <Typography color="white" paddingTop={1} paddingBottom={1}>
-                    BUY
-                  </Typography>
-                </Box> */}
               </CardContent>
             </Card>
             <Card sx={{ minWidth: 275 }}>
@@ -300,20 +325,6 @@ const MyPlants = () => {
                     25 rue Robert Latouche, Nice, 06200, Cote D’azur, France
                   </Typography>
                 </Box>
-                {/* <Box
-                  border={1}
-                  borderRadius={1}
-                  color="#EFEFEF"
-                  marginTop={3}
-                  alignItems="center"
-                  display="flex"
-                  justifyContent="center"
-                  backgroundColor="#284853"
-                >
-                  <Typography color="white" paddingTop={1} paddingBottom={1}>
-                    BUY
-                  </Typography>
-                </Box> */}
               </CardContent>
             </Card>
           </Box>

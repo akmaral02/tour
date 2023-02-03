@@ -1,23 +1,21 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Container, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import { useFlower } from "../../contexts/FlowerContextProvider";
 import FlowerCard from "./FlowerCard";
 
 const FlowerList = () => {
-  const { getFlower, flowers } = useFlower();
+  const { getFlower, flowers, searchParams } = useFlower();
+
   useEffect(() => {
-    getFlower(); //! for getting flowers from database
+    getFlower();
   }, []);
+
+  useEffect(() => {
+    getFlower();
+  }, [searchParams]);
 
   return (
     <Container>
-      {/* //! for rendering our flowers and do it more normal  */}
       <Grid
         item
         sx={{
@@ -28,9 +26,6 @@ const FlowerList = () => {
         }}
         md={10}
       >
-        {/* //! check have we in database some data under the key flowers it's our state in contexts
-        //! if we have we are maping our array and open our component to render every another object in our array in another card  
-        //! and give our every object as props to our component */}
         {flowers ? (
           flowers.map((flower) => <FlowerCard flower={flower} id={flower.id} />)
         ) : (

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,22 +6,20 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Container } from "@mui/system";
-import { Block } from "@mui/icons-material";
-import { Button, Link } from "@mui/material";
 import "./navbar.css";
 import Logo from "../images/logo.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { ICON_COLOR, MAIN_COLOR } from "../../helpers/consts";
+import { Link } from "react-router-dom";
+import { useFlower } from "../../contexts/FlowerContextProvider";
+import { useAuth } from "../../contexts/AuthContextProvider";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,7 +52,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -66,79 +63,98 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const { search, setSearch } = useFlower();
+  const { user, handleLogOut } = useAuth();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl); //false
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl); //false
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget); //функция которая меняет состояние на текущую
+    setAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null); // функция которая закрывает меню меняя состояние моб версия бургер
+    setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null); // закрывает иконка с профилем
-    handleMobileMenuClose(); //закрывает моб бургер
+    setAnchorEl(null);
+    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget); // меняет состояние на текущую
+    setMobileMoreAnchorEl(event.currentTarget);
   };
-  const menuId = "primary-search-account-menu"; //сохраняем Id профиля иконка
-  const renderMenu = //для отображения составной части профиля иконка как я поняла это функция которая в последующем вызывается
-    (
-      <Menu
-        anchorEl={anchorEl} //? anchorEl-это пропс /элемент(объект) или фцнкция которая возвращает его он нужен для установки положения поппера
-        //? поппер это всплывающая подсказка как я понял это нужно чтобы при нажатии появлялась состовня часть профиля иконка
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        id={menuId} // используем айди ктоторое мы сохранили в начале
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={isMenuOpen} // пропс имеет булево значение по дефолту он имеет false если он true то этот компонент покажется это состовная часть профиля
-        //здесь он закрыт так как имеет булево ложь
-        onClose={handleMenuClose} // пропс -функция которая вызывает колбек функцию при запросе закрытия компонента
-      >
-        {/* это состовные тексты при их нажатии вызывается функ. которая закрывает их  */}
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>
+        <Link className="links" to="/auth">
+          LOGIN
+        </Link>{" "}
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link className="links" to="/myplants">
+          {" "}
+          My Plants
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
 
-  const mobileMenuId = "primary-search-account-menu-mobile"; // айди для бургера
-  const renderMobileMenu = //для отображения меню
-    (
-      <Menu
-        anchorEl={mobileMoreAnchorEl} //тут он закрыт
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-      >
-        <MenuItem>HOME</MenuItem>
-        <MenuItem>FLOWERS</MenuItem>
-        <MenuItem>CONTACT US</MenuItem>
-        <MenuItem>BLOG</MenuItem>
-        <MenuItem>ADMIN</MenuItem>
-      </Menu>
-    );
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <Link className="links" to="/">
+        <MenuItem className="nav">HOME</MenuItem>
+      </Link>
+      <Link className="links" to="/flowers">
+        <MenuItem className="nav">FLOWERS</MenuItem>
+      </Link>
+      <Link className="links" to="/contactus">
+        <MenuItem className="nav">CONTACT US</MenuItem>
+      </Link>
+      <Link className="links" to="/myplants">
+        <MenuItem className="nav">MY PLANTS</MenuItem>
+      </Link>
+      {user.email === "bekmyrza@gmail.com" ? (
+        <Link className="links" to="/admin">
+          <MenuItem className="nav">ADMIN</MenuItem>
+        </Link>
+      ) : null}
+    </Menu>
+  );
 
   return (
     <div className="cont">
@@ -171,17 +187,29 @@ export default function Header() {
                 <MenuIcon />
               </IconButton>
 
-              <Box
-                component="img"
-                sx={{
-                  height: 64,
-                }}
-                alt="logo"
-                src={Logo}
-                color={`${MAIN_COLOR}`}
-              ></Box>
+              <Link to={"/"}>
+                <Box
+                  component="img"
+                  sx={{
+                    height: 64,
+                  }}
+                  alt="logo"
+                  src={Logo}
+                  color={`${MAIN_COLOR}`}
+                ></Box>
+              </Link>
               <Box>
-                <Typography color={`${ICON_COLOR}`}>
+                <Typography
+                  color={`${ICON_COLOR}`}
+                  sx={{
+                    display: {
+                      sm: "block",
+                      xs: "none",
+                      md: "block",
+                      lg: "block",
+                    },
+                  }}
+                >
                   ALKI | Art of Plants
                 </Typography>
               </Box>
@@ -196,13 +224,23 @@ export default function Header() {
                 color: `${MAIN_COLOR}`,
               }}
             >
-              <MenuItem className="nav">
-                <Link to="/"></Link> HOME
-              </MenuItem>
-              <MenuItem className="nav">FLOWERS</MenuItem>
-              <MenuItem className="nav">CONTACT US</MenuItem>
-              <MenuItem className="nav">BLOG</MenuItem>
-              <MenuItem className="nav">ADMIN</MenuItem>
+              <Link className="links" to="/">
+                <MenuItem className="nav">HOME</MenuItem>
+              </Link>
+              <Link className="links" to="/flowers">
+                <MenuItem className="nav">FLOWERS</MenuItem>
+              </Link>
+              <Link className="links" to="/contactus">
+                <MenuItem className="nav">CONTACT US</MenuItem>
+              </Link>
+              <Link className="links" to="/myplants">
+                <MenuItem className="nav">MY PLANTS</MenuItem>
+              </Link>
+              {user.email === "bekmyrza@gmail.com" ? (
+                <Link className="links" to="/admin">
+                  <MenuItem className="nav">ADMIN</MenuItem>
+                </Link>
+              ) : null}
             </Box>
 
             <Box
@@ -210,12 +248,6 @@ export default function Header() {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                // justifyContent: "space-evenly",
-                // display: {
-                //   lg: { flexGrow: 3.8 },
-                //   md: { flexGrow: 2 },
-                //   sm: { flexGrow: 0.1 },
-                // },
               }}
             >
               <Search>
@@ -225,6 +257,10 @@ export default function Header() {
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                   sx={{
                     border: 0.1,
                     color: "#EFEFEF",
@@ -239,41 +275,50 @@ export default function Header() {
               </Search>
 
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                {
+                <Link to={"/myplants"}>
                   <IconButton
                     size="large"
                     edge="end"
                     aria-label="account of current user"
-                    aria-controls={menuId}
                     aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
                   >
                     <ShoppingCartOutlinedIcon sx={{ color: `${ICON_COLOR}` }} />
                   </IconButton>
-                }
+                </Link>
               </Box>
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                {
+                {user.email ? (
                   <IconButton
                     size="large"
                     edge="end"
                     aria-label="account of current user"
-                    aria-controls={menuId}
                     aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
+                    onClick={handleLogOut}
                   >
-                    <AccountCircle sx={{ color: `${ICON_COLOR}` }} />
+                    <LogoutIcon sx={{ color: `${ICON_COLOR}` }} />
                   </IconButton>
-                }
+                ) : (
+                  <Link to={"/auth"}>
+                    <IconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                    >
+                      <AccountCircle sx={{ color: `${ICON_COLOR}` }} />
+                    </IconButton>
+                  </Link>
+                )}
               </Box>
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="show more"
-                aria-controls={mobileMenuId}
+                aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
+                onClick={handleProfileMenuOpen}
                 color={`${MAIN_COLOR}`}
               >
                 <MoreIcon />

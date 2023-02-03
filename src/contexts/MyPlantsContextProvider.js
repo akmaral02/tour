@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 
-export const MyPlantsContext = createContext();
-export const useMyPlants = () => useContext();
+const MyPlantsContext = createContext();
+export const useMyPlants = () => useContext(MyPlantsContext);
 
 const initState = {
   myplants: JSON.parse(localStorage.getItem("myplants")),
@@ -21,10 +21,9 @@ const MyPlantsContextProvider = ({ children }) => {
 
   //! FUNC FOR GETING FLOWERS FROM OUR CART IN LOCALSTORAGE
   const getMyPlants = () => {
-    let myplants = JSON.parse(localStorage.getItem("myplants")); //!WE SAVE OUR RESULT OF OUR REQUEST WITH DATA IN VARIABLE myplants
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
 
     if (!myplants) {
-      //! CHECK IS OUR VARIABLE EMPTY IF ITIS TRUE THAT HE IS EMPTY , SO WE SET BY KEY myplants OUR OBJECT
       localStorage.setItem(
         "myplants",
         JSON.stringify({ flowers: [], totalPrice: 0 })
@@ -34,13 +33,117 @@ const MyPlantsContextProvider = ({ children }) => {
         totalPrice: 0,
       };
     }
-    //! HERE WE SAVE IN OUR STATE
     dispatch({
       type: "getMyplants",
       payload: myplants,
     });
   };
-  let value = {};
+
+  //! FUNCT FOR ADDIN TO CART
+
+  const addToMyPlants = (flower) => {
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
+    if (!myplants) {
+      myplants = {
+        flowers: [],
+        totalPrice: 0,
+      };
+    }
+
+    let newFlower = {
+      item: flower,
+      count: 1,
+      subPrice: +flower.price,
+    };
+
+    let hasFlowerInMyPlants = myplants.flowers.filter(
+      (elem) => elem.Item.id === flower.id
+    );
+    if (hasFlowerInMyPlants.lenght === 0) {
+      myplants.flowers.push(newFlower);
+    } else {
+      myplants.flowers = myplants.flowers.filter(
+        (elem) => elem.Item.id !== flower.id
+      );
+    }
+
+    myplants.flowers.push(newFlower);
+    myplants.totalPrice = calcTotalPrice(myplants.flowers);
+    localStorage.setItem("myplants", JSON.stringify(myplants));
+    dispatch({
+      type: "getMyPlants",
+      payload: myplants,
+    });
+  };
+
+  //! FUNC FOR CHANGE COUNT
+  const incrementCount = (id) => {
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
+    myplants.flowers = myplants.flowers.map((flower) => {
+      if (flower.item.id === id) {
+        flower.count = flower.count + 1;
+        flower.subPrice = calcSubPrice(flower);
+      }
+      return flower;
+    });
+    myplants.totalPrice = calcTotalPrice(myplants.flowers);
+    localStorage.setItem("myplants", JSON.stringify(myplants));
+    dispatch({
+      type: "getMyPlants",
+      payload: myplants,
+    });
+  };
+
+  const decrementCount = (id) => {
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
+    myplants.flowers = myplants.flowers.map((flower) => {
+      if (flower.item.id === id && flower.count !== 1) {
+        flower.count = flower.count - 1;
+        flower.subPrice = calcSubPrice(flower);
+      }
+      return flower;
+    });
+    myplants.totalPrice = calcTotalPrice(myplants.flowers);
+    localStorage.setItem("myplants", JSON.stringify(myplants));
+    dispatch({
+      type: "getMyPlants",
+      payload: myplants,
+    });
+  };
+
+  //! FUNC FOR DELETE FLOWER FROM BASKET
+
+  const deleteFromMyplants = (id) => {
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
+    myplants.flowers = myplants.flowers.filter(
+      (flower) => flower.item.id !== id
+    );
+    myplants.totalPrice = calcTotalPrice(myplants.flowers);
+    localStorage.setItem("myplants", JSON.stringify(myplants));
+    dispatch({
+      type: "getMyPlants",
+      payload: myplants,
+    });
+  };
+
+  function calcTotalPrice(flowers) {
+    return flowers.reduce((acc, cur) => {
+      return (acc += cur.subPrice);
+    }, 0);
+  }
+
+  function calcSubPrice(flower) {
+    return +flower.count * flower.item.price;
+  }
+
+  let value = {
+    myplants: state.myplants,
+    getMyPlants,
+    addToMyPlants,
+    incrementCount,
+    decrementCount,
+    deleteFromMyplants,
+  };
   return (
     <MyPlantsContext.Provider value={value}>
       {children}
