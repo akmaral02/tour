@@ -1,53 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {
-  Autocomplete,
-  Fab,
-  FormControl,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import { Alert, Autocomplete, InputAdornment, TextField } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
 import { useFlower } from "../../contexts/FlowerContextProvider";
 import { Box } from "@mui/system";
 import { Container } from "react-bootstrap";
-
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
 
 const AddFlowers = () => {
   const { addFlower } = useFlower();
   const [open, setOpen] = useState(false);
   const [flower, setFlower] = useState({
-    image: "",
+    image:
+      "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
     title: "",
-    price: 0,
-    description: "",
-    size: "",
-    category: "",
+    price: "",
+    description: "--",
+    size: "--",
+    category: "--",
     colors: "grey",
   });
 
   const [size, setSize] = useState(flower.size);
   const [inputValue, setInpValue] = useState("");
-
   const [category, setCategory] = useState(flower.category);
   const [inputCategoryValue, setInpCategoryValue] = useState("");
+  const [inpError, setInpError] = useState(false);
+  const [alert, setAlert] = useState("none");
 
   const handleChange = (e) => {
     if (e.target.name === "price") {
@@ -76,7 +61,20 @@ const AddFlowers = () => {
 
   const handleClose = () => {
     setOpen(false);
-    // console.log("clicked");
+  };
+
+  const handleSave = () => {
+    flower.title ? setInpError(false) : setInpError(true);
+    flower.price ? setInpError(false) : setInpError(true);
+    if (!flower.title || !flower.price) {
+      setAlert("flex");
+
+      return;
+    } else {
+      addFlower(flower);
+      setAlert("none");
+      setInpError(false);
+    }
   };
 
   const sizes = ["SX", "S", "M", "L", "XL", "XXL"];
@@ -102,23 +100,29 @@ const AddFlowers = () => {
           }}
         >
           <CardMedia height="295" width="295">
-            <AddCircleOutlineIcon
-              sx={{
-                fontSize: 255,
-                color: "#EFF2F8",
-                ":hover": { color: "#359740", transition: "2s" },
-              }}
-              onClick={handleClickOpen}
-            />
+            <Box width={245} margin="auto">
+              <AddCircleOutlineIcon
+                sx={{
+                  fontSize: 255,
+                  color: "#EFF2F8",
+                  ":hover": { color: "#359740", transition: "2s" },
+                }}
+                onClick={handleClickOpen}
+              />
+            </Box>
           </CardMedia>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              textAlign={"center"}
+            >
               Add New Flower
             </Typography>
           </CardContent>
         </Card>
       </Container>
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -126,7 +130,13 @@ const AddFlowers = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"New Flower"}</DialogTitle>
-        <DialogContent></DialogContent>
+        <Alert
+          severity="error"
+          sx={{ display: alert, justifyContent: "center", fontSize: 20 }}
+        >
+          Fill all fields
+        </Alert>
+
         <Box width={500}>
           <Box
             width={400}
@@ -144,18 +154,22 @@ const AddFlowers = () => {
             />
 
             <TextField
+              error={inpError}
               name="title"
               label="Title"
+              value={flower.title}
               id="outlined-size-normal"
               onChange={handleChange}
             />
             <TextField
+              error={inpError}
+              value={flower.price}
               name="price"
               label="Price"
               id="outlined-size-normal"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">som</InputAdornment>
+                  <InputAdornment position="end">EUR</InputAdornment>
                 ),
               }}
               onChange={handleChange}
@@ -183,7 +197,6 @@ const AddFlowers = () => {
               renderInput={(params) => (
                 <TextField {...params} label="Categories" />
               )}
-              // onChange={handleChange}
             />
             <Autocomplete
               value={size}
@@ -199,18 +212,11 @@ const AddFlowers = () => {
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Size" />}
             />
-            {/* {flower.size} */}
           </Box>
         </Box>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          <Button
-            onClick={() => {
-              addFlower(flower);
-            }}
-          >
-            Save
-          </Button>
+          <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </div>

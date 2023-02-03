@@ -1,17 +1,9 @@
-import React, {
-  Children,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { useNavigate } from "react-router-dom";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import fire from "../helpers/fire";
 
 export const authContext = createContext();
 
 export const useAuth = () => useContext(authContext);
-// const navigate = useNavigate();
 
 const AuthContextProvider = ({ children }) => {
   let [user, setUser] = useState("");

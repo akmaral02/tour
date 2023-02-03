@@ -1,5 +1,11 @@
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 
@@ -85,7 +91,6 @@ const FlowerContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-
   // фильтр
   const fetchByParams = async (query, value) => {
     // в куери лежит тип
@@ -101,9 +106,27 @@ const FlowerContextProvider = ({ children }) => {
     // getFlower();
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [search, setSearch] = useState(searchParams.get("q") || "");
+
+  useEffect(() => {
+    setSearchParams({
+      q: search,
+    });
+  }, [search]);
+
+  useEffect(() => {
+    getFlower();
+  }, [searchParams]);
+
   let value = {
     flowers: state.flowers,
     flowerDetails: state.flowerDetails,
+    searchParams,
+    setSearchParams,
+    search,
+    setSearch,
     addFlower,
     getFlower,
     getFlowerDetails,

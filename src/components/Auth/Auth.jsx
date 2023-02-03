@@ -1,21 +1,22 @@
-import React from "react";
-import { LockOutlined } from "@mui/icons-material";
+import React, { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
-  Avatar,
+  Box,
   Button,
-  Checkbox,
   Container,
-  CssBaseline,
-  FormControlLabel,
+  FormControl,
   Grid,
-  Link,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box } from "@mui/system";
 import { useAuth } from "../../contexts/AuthContextProvider";
-import { useNavigate } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const theme = createTheme();
 
@@ -23,127 +24,123 @@ const Auth = () => {
   const {
     email,
     password,
-    user,
+    // user,
 
     emailError,
     passwordError,
-    hasAccount,
+    // hasAccount,
     setEmail,
     setPassword,
-    setHasAccount,
+    // setHasAccount,
 
     handleSignin,
     handleSignUp,
-    handleLogOut,
   } = useAuth();
 
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [isSignUp, setSignUp] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <div className="auth">
-      <ThemeProvider className="leftSide">cfdji</ThemeProvider>
+    <div>
       <ThemeProvider theme={theme} className="rigtSide">
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar>
-              <LockOutlined />
-            </Avatar>
-            <Typography>Sign in</Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                size="small"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                value={email}
-                helperText={emailError}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                size="small"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                value={password}
-                helperText={passwordError}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-
-              {hasAccount ? (
-                <Link to="/home">
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2, backgroundColor: "green" }}
-                    onClick={handleSignin}
-                  >
-                    Sign In
-                  </Button>
-                </Link>
-              ) : (
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2, backgroundColor: "royalBlue" }}
-                  onClick={handleSignUp}
+        <Container>
+          {/*//! component="main" maxWidth="xs"*/}
+          <Grid container>
+            <Grid item lg={12}>
+              <form onSubmit={handleSubmit}>
+                <Box
+                  display="flex"
+                  flexDirection={"column"}
+                  maxWidth={400}
+                  alignItems="center"
+                  justifyContent={"center"}
+                  margin="auto"
+                  marginTop={5}
+                  padding={3}
+                  borderRadius={5}
+                  boxShadow={"5px 5px 10px #ccc"}
+                  sx={{
+                    ":hover": {
+                      boxShadow: "10px 10px 20px #ccc",
+                    },
+                  }}
                 >
-                  Sign Up
-                </Button>
-              )}
+                  <Typography variant="h2" padding={3} textAlign>
+                    {isSignUp ? "SignUp" : "Login"}
+                  </Typography>
+                  <TextField
+                    label="Email Address"
+                    value={email}
+                    name="email"
+                    margin="normal"
+                    type={"email"}
+                    variant="outlined"
+                    helperText={emailError}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  ></TextField>
+                  <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      value={password}
+                      helperText={passwordError}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      id="outlined-adornment-password"
+                      type={showPassword ? "text" : "password"}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormControl>
 
-              <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
-                <Grid item>
-                  {hasAccount ? (
-                    <Link
-                      href="#"
-                      variant="body2"
-                      onClick={() => setHasAccount(!hasAccount)}
-                    >
-                      Don't have an account? Sign Up.
-                    </Link>
-                  ) : (
-                    <Link
-                      href="#"
-                      variant="body2"
-                      onClick={() => setHasAccount(!hasAccount)}
-                    >
-                      Have an account? Sign In.
-                    </Link>
-                  )}
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
+                  <Button
+                    endIcon={isSignUp ? <HowToRegIcon /> : <LoginIcon />}
+                    type="submit"
+                    sx={{ marginTop: 3, borderRadius: 3 }}
+                    variant="contained"
+                    color="warning"
+                    onClick={isSignUp ? handleSignUp : handleSignin}
+                  >
+                    {isSignUp ? "SignUp" : "LogIn"}
+                  </Button>
+                  <Button
+                    endIcon={isSignUp ? <LoginIcon /> : <HowToRegIcon />}
+                    // onClick={resetState}
+                    onClick={() => setSignUp(!isSignUp)}
+                    sx={{ marginTop: 3, borderRadius: 3 }}
+                  >
+                    Change to {isSignUp ? "Login" : "SignUp"}
+                  </Button>
+                </Box>
+              </form>
+            </Grid>
+          </Grid>
         </Container>
       </ThemeProvider>
     </div>
