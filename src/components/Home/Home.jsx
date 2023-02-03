@@ -6,6 +6,7 @@ import {
   Grid,
   Rating,
   Stack,
+  styled,
   Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
@@ -27,16 +28,102 @@ import RheaSelvia from "../images/RheaSelvia.png";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { MAIN_COLOR } from "../../helpers/consts";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+// import CustomButton from "./CustomButton";
+import Main from "../images/main.png";
 
 const Home = () => {
+  const CustomBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    gap: theme.spacing(5),
+    marginTop: theme.spacing(3),
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+    },
+  }));
+
+  const Title = styled(Typography)(({ theme }) => ({
+    fontSize: "64px",
+    color: "#000336",
+    fontWeight: "bold",
+    margin: theme.spacing(4, 0, 4, 0),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "40px",
+    },
+  }));
   return (
     <div>
-      <Container>
+      <Box sx={{ minHeight: "80vh" }}>
+        <Container>
+          <CustomBox>
+            <Box sx={{ flex: "1" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "18px",
+                  color: "#687690",
+                  fontWeight: "500",
+                  mt: 10,
+                  mb: 4,
+                }}
+              >
+                Welcome to Besnik Agency
+              </Typography>
+              <Title variant="h1">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit
+              </Title>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              >
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
+                porro ducimus ex labore exercitationem earum.
+              </Typography>
+              <CustomButton
+                backgroundColor="#0F184C"
+                heroBtn={true}
+                color="#fff"
+                buttonText="More About Us"
+              ></CustomButton>
+            </Box>
+
+            <Box sx={{ flex: "1.25" }}>
+              <img
+                src="https://www.makerstations.io/content/images/2021/09/severin-candrian-1gwjE0c3PSQ-unsplash.jpg"
+                alt="img"
+                style={{ maxWidth: "100%", marginbottom: "2rem" }}
+              ></img>
+            </Box>
+          </CustomBox>
+        </Container>
+      </Box>
+
+      {/* <div className="home">
+        <Container>
+          <div className="content">
+            <h3>fresh flowers</h3>
+            <span>natural & beautiful flowers</span>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Molestiae facilis voluptates aut enim dolor iusto voluptatem,
+              vitae iste voluptatum pariatur suscipit ratione ad soluta debitis
+              obcaecati voluptas consectetur eveniet repellendus!
+            </p>
+            <a href="#" className="btn">
+              Shop now
+            </a>
+          </div>
+        </Container>
+      </div> */}
+      {/* <Container>
         <Box
           component="img"
           sx={{
             height: "100%",
             width: "100%",
+            marginTop: 15,
           }}
           alt="landing"
           src={Landing}
@@ -52,14 +139,25 @@ const Home = () => {
             alt="news"
             src={New}
           ></Box>
-          <Typography
+          <Box
             position="absolute"
-            bottom={45}
-            left={365}
-            letterSpacing={3}
+            height={10}
+            // backgroundColor="black"
+            display="flex"
+            sx={{ bottom: { xs: 25, sm: 30, md: 50, lg: 65, xl: 80 } }}
+            justifyContent="center"
+            width="100%"
           >
-            Will be ready to harvest on monday 23.03.2023
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: 12, sm: 18, md: 20, lg: 24, xl: 28 },
+                left: { xs: 305, sm: 325, md: 345, lg: 365, xl: 385 },
+                letterSpacing: { xs: 1, sm: 2, md: 4, lg: 6, xl: 8 },
+              }}
+            >
+              Will be ready to harvest on monday 23.03.2023
+            </Typography>
+          </Box>
         </Box>
         <Box>
           <Typography
@@ -159,7 +257,7 @@ const Home = () => {
             </CardContent>
           </Card>
         </Box>
-      </Container>
+      </Container> */}
     </div>
   );
 };

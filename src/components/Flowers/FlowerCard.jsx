@@ -20,16 +20,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import EditIcon from "@mui/icons-material/Edit";
+import { color } from "@mui/system";
 
 const FlowerCard = ({ flower, id }) => {
   //  ! get our props and destructuring them
   const { deleteFlower, flowerDetails, saveEditedFlower, getFlowerDetails } =
     useFlower();
-
-  // console.log(id);
 
   const [open, setOpen] = React.useState(false); //!its for dialog window
 
@@ -85,6 +83,12 @@ const FlowerCard = ({ flower, id }) => {
     "FRUIT",
   ];
 
+  const [colorI, setColor] = useState("#ffcf55");
+
+  const changeColor = () => {
+    setColor("red");
+  };
+
   return (
     <div>
       {/* //! CARD START  */}
@@ -94,7 +98,6 @@ const FlowerCard = ({ flower, id }) => {
             className="flower-img"
             component="img"
             alt={flower.title}
-            // src={RheaSelvia}
             src={flower.image}
           />
           <CardContent>
@@ -107,7 +110,10 @@ const FlowerCard = ({ flower, id }) => {
               </Typography>
             </Box>
             <Box className="card-like">
-              <FavoriteBorderOutlinedIcon />
+              <FavoriteBorderOutlinedIcon
+                sx={{ color: colorI }}
+                onClick={() => changeColor()}
+              />
             </Box>
             <Box textAlign="start">
               <Box className="card-hover" display="none">
@@ -223,7 +229,6 @@ const FlowerCard = ({ flower, id }) => {
               renderInput={(params) => (
                 <TextField {...params} label="Categories" />
               )}
-              // onChange={handleChange}
             />
             <Autocomplete
               value={flowerForEdit.size}
@@ -239,7 +244,6 @@ const FlowerCard = ({ flower, id }) => {
               options={sizes}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Size" />}
-              // onInputChange={handleChange}
             />
           </Box>
         </Box>
@@ -261,4 +265,4 @@ const FlowerCard = ({ flower, id }) => {
   );
 };
 
-// export default FlowerCard;
+export default FlowerCard;

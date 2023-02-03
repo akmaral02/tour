@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { API } from "../helpers/consts";
 
 export const flowerContext = createContext();
@@ -41,7 +41,7 @@ const FlowerContextProvider = ({ children }) => {
   //!function for GET FLOWERS
   const getFlower = async () => {
     try {
-      let res = await axios.get(`${API}`);
+      let res = await axios.get(`${API}${window.location.search}`);
       dispatch({
         type: "getFlower",
         payload: res.data,
@@ -86,6 +86,21 @@ const FlowerContextProvider = ({ children }) => {
     }
   };
 
+  // фильтр
+  const fetchByParams = async (query, value) => {
+    // в куери лежит тип
+    // value - параметр
+    const search = new URLSearchParams(location.search);
+    if (value === "ALL") {
+      search.delete(query);
+    } else {
+      search.set(query, value);
+    }
+    const url = `${location.pathname}?${search.toString()}`;
+    navigate(url);
+    // getFlower();
+  };
+
   let value = {
     flowers: state.flowers,
     flowerDetails: state.flowerDetails,
@@ -94,9 +109,10 @@ const FlowerContextProvider = ({ children }) => {
     getFlowerDetails,
     deleteFlower,
     saveEditedFlower,
+    fetchByParams,
   };
   return (
-    <flowerContext.Provider value={value}>{children} </flowerContext.Provider>
+    <flowerContext.Provider value={value}>{children}</flowerContext.Provider>
   );
 };
 
