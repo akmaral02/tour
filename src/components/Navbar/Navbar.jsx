@@ -6,18 +6,13 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Container } from "@mui/system";
-import { Block } from "@mui/icons-material";
-import { Button, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import "./navbar.css";
 import Logo from "../images/logo.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -145,7 +140,6 @@ export default function Header() {
       <Box
         sx={{
           flexGrow: 12,
-          marginBottom: 15,
 
           display: "flex",
           justifyContent: "space-between",

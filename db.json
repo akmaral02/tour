@@ -6,10 +6,10 @@
       "price": 950,
       "description": "Architectural and sturdy, this plant is easy to care for and highly adaptable. Also known as a Snake Plant and Mother-in-Law’s Tongue.",
       "size": "",
-      "categories": " Indoor Plants",
       "colors": "grey",
       "undefined": 0,
-      "id": 2
+      "id": 2,
+      "category": "CACTUS"
     },
     {
       "image": "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_money-tree_slate-e1643402075928.jpg?ver=279409",
@@ -17,72 +17,12 @@
       "price": 78452,
       "description": "gvhjkl",
       "size": "",
-      "categories": "yui",
       "colors": "grey",
       "undefined": 0,
-      "id": 3
+      "id": 3,
+      "category": "CACTUS"
     },
-    {
-      "image": "https://bloomscape.com/wp-content/uploads/2023/01/CF_C021_R-324x389.jpg?ver=997067",
-      "title": "DDDDDDDDDDDDDDD",
-      "price": 78452,
-      "description": "gvhjkl",
-      "size": "",
-      "categories": "yui",
-      "colors": "grey",
-      "id": 5,
-      "undefined": 0
-    },
-    {
-      "image": "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_bamboo-palm_stone-1-450x550.jpg?ver=279689",
-      "title": "TJTJTJTJTJ",
-      "price": 52,
-      "description": "uhjnm ",
-      "size": "",
-      "categories": " Indoor Plants",
-      "colors": "grey",
-      "id": 8
-    },
-    {
-      "image": "hsdjfkg",
-      "title": "gasdufio",
-      "price": 8451,
-      "description": "afsdgu",
-      "size": "XL",
-      "categories": "ghjk",
-      "colors": "grey",
-      "id": 9
-    },
-    {
-      "image": "",
-      "title": "",
-      "price": 0,
-      "description": "",
-      "size": "XL",
-      "categories": "",
-      "colors": "grey",
-      "id": 10
-    },
-    {
-      "image": "",
-      "title": "",
-      "price": 0,
-      "description": "",
-      "size": "",
-      "categories": "",
-      "colors": "grey",
-      "id": 11
-    },
-    {
-      "image": "ghesdjfgh",
-      "title": "Kkkkk",
-      "price": 745,
-      "description": "yedufigo",
-      "size": "XXL",
-      "categories": "gwerufig",
-      "colors": "grey",
-      "id": 12
-    },
+
     {
       "image": "hsdjfgk",
       "title": "HHHHH",
@@ -93,6 +33,7 @@
       "colors": "grey",
       "id": 13
     },
+
     {
       "image": "sdf",
       "title": "WQWQW",
@@ -109,7 +50,7 @@
       "price": 88,
       "description": "fgh",
       "size": "S",
-      "category": "FERN",
+      "category": "CACTUS",
       "colors": "grey",
       "id": 15
     }
