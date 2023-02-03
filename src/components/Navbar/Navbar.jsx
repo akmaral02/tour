@@ -110,12 +110,11 @@ export default function Header() {
       <MenuItem onClick={handleMenuClose}>
         <Link className="links" to="/auth">
           LOGIN
-        </Link>{" "}
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <Link className="links" to="/myplants">
-          {" "}
-          My Plants
+          MY PLANTS
         </Link>
       </MenuItem>
     </Menu>
@@ -150,14 +149,13 @@ export default function Header() {
       <Link className="links" to="/myplants">
         <MenuItem className="nav">MY PLANTS</MenuItem>
       </Link>
-      {user.email === "bekmyrza@gmail.com" ? (
+      {user.email === "admin@admin" ? (
         <Link className="links" to="/admin">
           <MenuItem className="nav">ADMIN</MenuItem>
         </Link>
       ) : null}
     </Menu>
   );
-
 
   return (
     <div className="cont">
@@ -227,7 +225,6 @@ export default function Header() {
                 color: "#284853",
               }}
             >
-
               <Link className="links" to="/">
                 <MenuItem className="nav">HOME</MenuItem>
               </Link>
@@ -245,7 +242,6 @@ export default function Header() {
                   <MenuItem className="nav">ADMIN</MenuItem>
                 </Link>
               ) : null}
-
             </Box>
 
             <Box

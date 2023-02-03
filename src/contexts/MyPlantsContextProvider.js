@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
 
-const MyPlantsContext = createContext();
+export const MyPlantsContext = createContext();
 export const useMyPlants = () => useContext(MyPlantsContext);
 
 const initState = {
@@ -57,13 +57,13 @@ const MyPlantsContextProvider = ({ children }) => {
     };
 
     let hasFlowerInMyPlants = myplants.flowers.filter(
-      (elem) => elem.Item.id === flower.id
+      (elem) => elem.item.id === flower.id
     );
-    if (hasFlowerInMyPlants.lenght === 0) {
+    if (hasFlowerInMyPlants.length === 0) {
       myplants.flowers.push(newFlower);
     } else {
       myplants.flowers = myplants.flowers.filter(
-        (elem) => elem.Item.id !== flower.id
+        (elem) => elem.item.id !== flower.id
       );
     }
 
@@ -126,6 +126,20 @@ const MyPlantsContextProvider = ({ children }) => {
     });
   };
 
+  function hasInMyplants(id) {
+    let myplants = JSON.parse(localStorage.getItem("myplants"));
+
+    if (myplants) {
+      let newMyplants = myplants.flowers.filter((elem) => elem.item.id === id);
+      return newMyplants.length > 0 ? true : false;
+    } else {
+      myplants = {
+        flower: [],
+        totalPrice: 0,
+      };
+    }
+  }
+
   function calcTotalPrice(flowers) {
     return flowers.reduce((acc, cur) => {
       return (acc += cur.subPrice);
@@ -143,6 +157,7 @@ const MyPlantsContextProvider = ({ children }) => {
     incrementCount,
     decrementCount,
     deleteFromMyplants,
+    hasInMyplants,
   };
   return (
     <MyPlantsContext.Provider value={value}>

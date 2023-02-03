@@ -9,6 +9,7 @@ import {
   Autocomplete,
   InputAdornment,
   Grid,
+  IconButton,
 } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
@@ -30,7 +31,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 const FlowerCard = ({ flower, id }) => {
   const { deleteFlower, flowerDetails, saveEditedFlower, getFlowerDetails } =
     useFlower();
-  const { addToMyPlants } = useMyPlants();
+  const { addToMyPlants, hasInMyplants } = useMyPlants();
   const { user } = useAuth();
 
   const [open, setOpen] = React.useState(false);
@@ -152,7 +153,7 @@ const FlowerCard = ({ flower, id }) => {
                     {flower.price} EUR
                   </Typography>
 
-                  {user.email === "bekmyrza@gmail.com" ? (
+                  {user.email === "admin@admin.com" ? (
                     <>
                       <Box>
                         <DeleteIcon
@@ -166,11 +167,12 @@ const FlowerCard = ({ flower, id }) => {
                       </Box>
                     </>
                   ) : (
-                    <Box className="add-to-cart">
+                    <IconButton className="add-to-cart">
                       <AddShoppingCartOutlinedIcon
                         onClick={() => addToMyPlants(flower)}
+                        color={hasInMyplants(flower.id) ? "secondary" : ""}
                       />
-                    </Box>
+                    </IconButton>
                   )}
                 </Box>
               </Box>

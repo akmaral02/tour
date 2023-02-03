@@ -17,7 +17,6 @@ root.render(
             <App />
           </FlowerContextProvider>
         </AuthContextProvider>
-
       </MyPlantsContextProvider>
     </BrowserRouter>
   </React.StrictMode>

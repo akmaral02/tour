@@ -1,29 +1,24 @@
-
 import List from "./ims/List.png";
 import React from "react";
 import { LockOutlined } from "@mui/icons-material";
-
-
 import {
-  Box,
+  Avatar,
   Button,
+  Checkbox,
   Container,
-  FormControl,
+  CssBaseline,
+  FormControlLabel,
   Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
+  Link,
   TextField,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import { useAuth } from "../../contexts/AuthContextProvider";
-
 import { useNavigate } from "react-router-dom";
 import list from "./ims/list.jpg";
 import "./Auth.css";
-
 
 const theme = createTheme();
 
@@ -31,19 +26,19 @@ const Auth = () => {
   const {
     email,
     password,
-    // user,
+    user,
 
     emailError,
     passwordError,
-    // hasAccount,
+    hasAccount,
     setEmail,
     setPassword,
-    // setHasAccount,
+    setHasAccount,
 
     handleSignin,
     handleSignUp,
+    handleLogOut,
   } = useAuth();
-
 
   let setBlack = (e) => {
     if (e.target.style.borderColor === "blue")
@@ -144,7 +139,6 @@ const Auth = () => {
                 }}
                 variant="outlined"
               />
-
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 // sx={{ color: "#284853" }}
@@ -152,9 +146,11 @@ const Auth = () => {
                 label="Remember me"
               />
 
-
-
-
+              {hasAccount ? (
+                <Link to="/home">
+                  <Button
+                    fullWidth
+                    variant="contained"
                     sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
                     // sx={{
                     //   width: { sm: 250, md: 350 },
@@ -165,8 +161,9 @@ const Auth = () => {
                     //   },
                     // }}
                     onClick={handleSignin}
-
-
+                  >
+                    Sign In
+                  </Button>
                 </Link>
               ) : (
                 <Button
@@ -180,10 +177,10 @@ const Auth = () => {
               )}
 
               <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+                {/* <Grid item xs> 
+                  <Link href="#" variant="body2"> 
+                    Forgot password? 
+                  </Link> 
                 </Grid> */}
                 <Grid item>
                   {hasAccount ? (
@@ -209,7 +206,6 @@ const Auth = () => {
               </Grid>
             </Box>
           </Box>
-
         </Container>
       </ThemeProvider>
     </div>
