@@ -16,6 +16,7 @@ import "./navbar.css";
 import Logo from "../images/logo.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { ICON_COLOR, MAIN_COLOR } from "../../helpers/consts";
+
 import { Link } from "react-router-dom";
 import { useFlower } from "../../contexts/FlowerContextProvider";
 import { useAuth } from "../../contexts/AuthContextProvider";
@@ -88,6 +89,7 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -156,6 +158,7 @@ export default function Header() {
     </Menu>
   );
 
+
   return (
     <div className="cont">
       <Box
@@ -220,9 +223,11 @@ export default function Header() {
                 justifyContent: "center",
                 columnGap: 2,
                 display: { xs: "none", sm: "none", md: "flex", lg: "flex" },
-                color: `${MAIN_COLOR}`,
+                // color: `${MAIN_COLOR}`,
+                color: "#284853",
               }}
             >
+
               <Link className="links" to="/">
                 <MenuItem className="nav">HOME</MenuItem>
               </Link>
@@ -240,6 +245,7 @@ export default function Header() {
                   <MenuItem className="nav">ADMIN</MenuItem>
                 </Link>
               ) : null}
+
             </Box>
 
             <Box

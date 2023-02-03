@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+import List from "./ims/List.png";
+import React from "react";
+import { LockOutlined } from "@mui/icons-material";
+
+
 import {
   Box,
   Button,
@@ -15,8 +19,11 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../contexts/AuthContextProvider";
-import LoginIcon from "@mui/icons-material/Login";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
+
+import { useNavigate } from "react-router-dom";
+import list from "./ims/list.jpg";
+import "./Auth.css";
+
 
 const theme = createTheme();
 
@@ -37,110 +44,172 @@ const Auth = () => {
     handleSignUp,
   } = useAuth();
 
-  const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  let setBlack = (e) => {
+    if (e.target.style.borderColor === "blue")
+      e.target.style.borderColor = "black";
   };
 
-  const [isSignUp, setSignUp] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
+  const navigate = useNavigate();
   return (
-    <div>
-      <ThemeProvider theme={theme} className="rigtSide">
-        <Container>
-          {/*//! component="main" maxWidth="xs"*/}
-          <Grid container>
-            <Grid item lg={12}>
-              <form onSubmit={handleSubmit}>
-                <Box
-                  display="flex"
-                  flexDirection={"column"}
-                  maxWidth={400}
-                  alignItems="center"
-                  justifyContent={"center"}
-                  margin="auto"
-                  marginTop={5}
-                  padding={3}
-                  borderRadius={5}
-                  boxShadow={"5px 5px 10px #ccc"}
-                  sx={{
-                    ":hover": {
-                      boxShadow: "10px 10px 20px #ccc",
+    <div className="auz">
+      <Container className="leftSide">
+        <img
+          className="image"
+          src={list}
+          style={{ width: "100%", height: "50%" }}
+        />
+        <h1 className="welcome image">Welcome to the ALKI</h1>
+        <h3 className="welcome-1 image">Art of Plants</h3>
+      </Container>
+      <ThemeProvider theme={theme} className="rightSide">
+        <Container
+          // component="main"
+          maxWidth="xs"
+          style={{ marginTop: "-6%", marginRight: "6%" }}
+        >
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <img src={List} alt="create" />
+              <Box style={{ color: "#284853" }}>
+                {hasAccount ? (
+                  <Box className="">
+                    <h3>Welcome</h3>
+                    <p>Login to continue!</p>
+                  </Box>
+                ) : (
+                  <Box className="create">
+                    <h3>Create account</h3>
+                    <p>Register to get started!</p>
+                  </Box>
+                )}
+              </Box>
+            </Box>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                size="small"
+                required
+                fullWidth
+                id="email"
+                // label="Email Address"
+                placeholder="email address"
+                name="email"
+                value={email}
+                helperText={emailError}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                autoComplete="email"
+                autoFocus
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: "#284853",
                     },
-                  }}
-                >
-                  <Typography variant="h2" padding={3} textAlign>
-                    {isSignUp ? "SignUp" : "Login"}
-                  </Typography>
-                  <TextField
-                    label="Email Address"
-                    value={email}
-                    name="email"
-                    margin="normal"
-                    type={"email"}
-                    variant="outlined"
-                    helperText={emailError}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  ></TextField>
-                  <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Password
-                    </InputLabel>
-                    <OutlinedInput
-                      value={password}
-                      helperText={passwordError}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Password"
-                    />
-                  </FormControl>
+                  },
+                }}
+              />
+              <TextField
+                margin="normal"
+                size="small"
+                required
+                fullWidth
+                name="password"
+                // label="Password"
+                placeholder="password"
+                type="password"
+                id="password"
+                value={password}
+                helperText={passwordError}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                autoComplete="current-password"
+                onClick={setBlack}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: "#284853",
+                    },
+                  },
+                }}
+                variant="outlined"
+              />
 
-                  <Button
-                    endIcon={isSignUp ? <HowToRegIcon /> : <LoginIcon />}
-                    type="submit"
-                    sx={{ marginTop: 3, borderRadius: 3 }}
-                    variant="contained"
-                    color="warning"
-                    onClick={isSignUp ? handleSignUp : handleSignin}
-                  >
-                    {isSignUp ? "SignUp" : "LogIn"}
-                  </Button>
-                  <Button
-                    endIcon={isSignUp ? <LoginIcon /> : <HowToRegIcon />}
-                    // onClick={resetState}
-                    onClick={() => setSignUp(!isSignUp)}
-                    sx={{ marginTop: 3, borderRadius: 3 }}
-                  >
-                    Change to {isSignUp ? "Login" : "SignUp"}
-                  </Button>
-                </Box>
-              </form>
-            </Grid>
-          </Grid>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                // sx={{ color: "#284853" }}
+                style={{ color: "black" }}
+                label="Remember me"
+              />
+
+
+
+
+                    sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
+                    // sx={{
+                    //   width: { sm: 250, md: 350 },
+                    //   "& .MuiOutlinedInput-root:hover": {
+                    //     "& > fieldset": {
+                    //       borderColor: "orange",
+                    //     },
+                    //   },
+                    // }}
+                    onClick={handleSignin}
+
+
+                </Link>
+              ) : (
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#284853" }}
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </Button>
+              )}
+
+              <Grid container>
+                {/* <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid> */}
+                <Grid item>
+                  {hasAccount ? (
+                    <Link
+                      href="#"
+                      variant="body2"
+                      onClick={() => setHasAccount(!hasAccount)}
+                      style={{ color: "black", textDecoration: "none" }}
+                    >
+                      Don't have an account? Sign Up.
+                    </Link>
+                  ) : (
+                    <Link
+                      href="#"
+                      variant="body2"
+                      onClick={() => setHasAccount(!hasAccount)}
+                      style={{ color: "black", textDecoration: "none" }}
+                    >
+                      Have an account? Sign In.
+                    </Link>
+                  )}
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+
         </Container>
       </ThemeProvider>
     </div>
