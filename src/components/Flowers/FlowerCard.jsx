@@ -3,13 +3,14 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Rating,
   Stack,
   Typography,
   TextField,
   Autocomplete,
   InputAdornment,
+  Grid,
 } from "@mui/material";
+import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
@@ -24,6 +25,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMyPlants } from "../../contexts/MyPlantsContextProvider";
 import { useAuth } from "../../contexts/AuthContextProvider";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const FlowerCard = ({ flower, id }) => {
   const { deleteFlower, flowerDetails, saveEditedFlower, getFlowerDetails } =
@@ -32,6 +34,7 @@ const FlowerCard = ({ flower, id }) => {
   const { user } = useAuth();
 
   const [open, setOpen] = React.useState(false);
+  const [iconColor, setIconColor] = useState("#ffcf55");
 
   useEffect(() => {
     getFlowerDetails(id);
@@ -83,80 +86,98 @@ const FlowerCard = ({ flower, id }) => {
     "FRUIT",
   ];
 
+  const changeColor = () => {
+    setIconColor("secondary");
+  };
+
   return (
     <div>
       {/* //! CARD START  */}
-      <Box width={350} height={512} marginTop={6} position="relative">
-        <Card className="flower-card" key={id}>
-          <CardMedia
-            className="flower-img"
-            component="img"
-            alt={flower.title}
-            // src={RheaSelvia}
-            src={flower.image}
-          />
-          <CardContent>
-            <Box display="flex" alignItems="center">
-              <Stack spacing={1}>
-                <Rating defaultValue={5} size="small"></Rating>
-              </Stack>
-              <Typography marginLeft={2} fontSize={12}>
-                (123)
-              </Typography>
-            </Box>
-            <Box className="card-like">
-              <FavoriteBorderOutlinedIcon />
-            </Box>
-            <Box textAlign="start">
-              <Box className="card-hover" display="none">
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  display="flex"
-                  justifyContent="center"
-                >
-                  {flower.category}
-                  <br />
-                  Size: {flower.size}
+      <Grid
+        item
+        lg={4}
+        md={6}
+        sm={12}
+        xs={12}
+        sx={{
+          marginTop: { lg: 0, md: 10, sm: 5, xs: 5 },
+          display: { lg: "flex", md: "flex", sm: "flex", xs: "flex" },
+          marginRight: { lg: 0, md: 5, sm: "auto", xs: "auto" },
+          marginLeft: { lg: 0, md: 5, sm: 20, xs: 5.5 },
+        }}
+      >
+        <Box width={350} height={512} marginTop={6} position="relative">
+          <Card className="flower-card" key={id}>
+            <CardMedia
+              className="flower-img"
+              component="img"
+              alt={flower.title}
+              src={flower.image}
+            />
+            <CardContent>
+              <Box display="flex" alignItems="center">
+                <Stack spacing={1}>
+                  <Rating defaultValue={5} size="small"></Rating>
+                </Stack>
+                <Typography marginLeft={2} fontSize={12}>
+                  (123)
                 </Typography>
               </Box>
-              <Typography gutterBottom variant="h5" component="div">
-                {flower.title}
-              </Typography>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography variant="h5" component="div">
-                  {flower.price} EUR
+              <Box className="card-like">
+                <FavoriteIcon color={iconColor} onClick={changeColor} />
+                {/* //44 */}
+              </Box>
+              <Box textAlign="start">
+                <Box className="card-hover" display="none">
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    {flower.category}
+                    <br />
+                    Size: {flower.size}
+                  </Typography>
+                </Box>
+                <Typography gutterBottom variant="h5" component="div">
+                  {flower.title}
                 </Typography>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="h5" component="div">
+                    {flower.price} EUR
+                  </Typography>
 
-                {user.email === "bekmyrza@gmail.com" ? (
-                  <>
-                    <Box>
-                      <DeleteIcon
-                        onClick={() => {
-                          deleteFlower(flower.id);
-                        }}
+                  {user.email === "bekmyrza@gmail.com" ? (
+                    <>
+                      <Box>
+                        <DeleteIcon
+                          onClick={() => {
+                            deleteFlower(flower.id);
+                          }}
+                        />
+                      </Box>
+                      <Box>
+                        <EditIcon onClick={handleClickOpen} />
+                      </Box>
+                    </>
+                  ) : (
+                    <Box className="add-to-cart">
+                      <AddShoppingCartOutlinedIcon
+                        onClick={() => addToMyPlants(flower)}
                       />
                     </Box>
-                    <Box>
-                      <EditIcon onClick={handleClickOpen} />
-                    </Box>
-                  </>
-                ) : (
-                  <Box className="add-to-cart">
-                    <AddShoppingCartOutlinedIcon
-                      onClick={() => addToMyPlants(flower)}
-                    />
-                  </Box>
-                )}
+                  )}
+                </Box>
               </Box>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Grid>
       {/* //? CARD END */}
 
       {/* //! DIALOG START */}

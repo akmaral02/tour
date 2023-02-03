@@ -6,10 +6,10 @@
       "price": 950,
       "description": "Architectural and sturdy, this plant is easy to care for and highly adaptable. Also known as a Snake Plant and Mother-in-Law’s Tongue.",
       "size": "",
-      "categories": " Indoor Plants",
       "colors": "grey",
       "undefined": 0,
-      "id": 2
+      "id": 2,
+      "category": "CACTUS"
     },
     {
       "image": "https://bloomscape.com/wp-content/uploads/2023/01/CF_C021_R-324x389.jpg?ver=997067",
@@ -17,7 +17,6 @@
       "price": 78452,
       "description": "gvhjkl",
       "size": "",
-      "categories": "yui",
       "colors": "grey",
       "id": 5,
       "undefined": 0
@@ -72,6 +71,7 @@
       "colors": "grey",
       "id": 12
     },
+
     {
       "image": "hsdjfgk",
       "title": "HHHHH",
@@ -82,6 +82,7 @@
       "colors": "grey",
       "id": 13
     },
+
     {
       "image": "sdf",
       "title": "WQWQW",
@@ -98,7 +99,7 @@
       "price": 88,
       "description": "fgh",
       "size": "S",
-      "category": "FERN",
+      "category": "CACTUS",
       "colors": "grey",
       "id": 15
     },

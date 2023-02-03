@@ -1,11 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  transition: 0.2s linear;
+}
+
 .category {
   width: auto;
   border: solid 2px #efefef;
   border-radius: 8px;
   text-transform: capitalize;
-  padding: 20px 40px;
+  padding: 20px 30px;
   align-items: center;
-  /* color: #70737c; */
+  margin: 10px;
 }
 .category:hover {
   transition: all 0.2s ease-out;
@@ -24,4 +33,58 @@
 
 .category:hover::before {
   transform: scale(2.15);
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: url("https://www.imgonline.com.ua/result_img/imgonline-com-ua-Mirror-mby3xgBOEMBc8.png")
+    no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  border-radius: 5rem;
+  background: #333;
+  padding: 9rem 3.5rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.7rem;
+}
+
+.btn:hover {
+  background: pink;
+}
+
+.home .content {
+  max-width: 50rem;
+}
+
+.home .content h3 {
+  font-size: 6rem;
+  color: #333;
+}
+
+.home .content span {
+  font-size: 3.5rem;
+  color: pink;
+  padding: 1rem 0;
+  line-height: 1.5;
+}
+
+.home .content p {
+  font-size: 1.5rem;
+  color: #999;
+  padding: 1rem 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 991px) {
+  .home {
+    padding: 2rem;
+  }
 }

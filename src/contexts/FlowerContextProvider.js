@@ -91,6 +91,20 @@ const FlowerContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+  // фильтр
+  const fetchByParams = async (query, value) => {
+    // в куери лежит тип
+    // value - параметр
+    const search = new URLSearchParams(location.search);
+    if (value === "ALL") {
+      search.delete(query);
+    } else {
+      search.set(query, value);
+    }
+    const url = `${location.pathname}?${search.toString()}`;
+    navigate(url);
+    // getFlower();
+  };
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -118,9 +132,10 @@ const FlowerContextProvider = ({ children }) => {
     getFlowerDetails,
     deleteFlower,
     saveEditedFlower,
+    fetchByParams,
   };
   return (
-    <flowerContext.Provider value={value}>{children} </flowerContext.Provider>
+    <flowerContext.Provider value={value}>{children}</flowerContext.Provider>
   );
 };
 

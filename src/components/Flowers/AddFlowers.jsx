@@ -112,7 +112,12 @@ const AddFlowers = () => {
             </Box>
           </CardMedia>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              textAlign={"center"}
+            >
               Add New Flower
             </Typography>
           </CardContent>

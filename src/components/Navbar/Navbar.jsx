@@ -162,7 +162,6 @@ export default function Header() {
         sx={{
           flexGrow: 12,
           marginBottom: 15,
-
           display: "flex",
           justifyContent: "space-between",
         }}
