@@ -91,10 +91,8 @@ const FlowerContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-  // фильтр
+
   const fetchByParams = async (query, value) => {
-    // в куери лежит тип
-    // value - параметр
     const search = new URLSearchParams(location.search);
     if (value === "ALL") {
       search.delete(query);
@@ -103,7 +101,6 @@ const FlowerContextProvider = ({ children }) => {
     }
     const url = `${location.pathname}?${search.toString()}`;
     navigate(url);
-    // getFlower();
   };
 
   const [searchParams, setSearchParams] = useSearchParams();

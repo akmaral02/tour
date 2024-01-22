@@ -59,7 +59,7 @@ const MyPlantsContextProvider = ({ children }) => {
     let hasFlowerInMyPlants = myplants.flowers.filter(
       (elem) => elem.item.id === flower.id
     );
-    if (hasFlowerInMyPlants.length === 0) {
+    if (hasFlowerInMyPlants.lenght === 0) {
       myplants.flowers.push(newFlower);
     } else {
       myplants.flowers = myplants.flowers.filter(

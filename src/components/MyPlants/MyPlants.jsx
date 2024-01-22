@@ -16,12 +16,13 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Modal from "@mui/material/Modal";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import { useMyPlants } from "../../contexts/MyPlantsContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../MyPlants/payment.css";
 
 const MyPlants = () => {
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

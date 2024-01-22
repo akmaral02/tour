@@ -25,13 +25,13 @@ import { useSearchParams } from "react-router-dom";
 
 const FlowerList = () => {
   const { getFlower, flowers, fetchByParams } = useFlower();
-  const [searchParams, setSearchParams] = useSearchParams(); // возвращает объект (фильтр)
-  const [search, setSearch] = useState(searchParams.get("q") || ""); // серч - за привязку к инпутам | серчпарамс - следит за изменениями (фильтр)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") || "");
   const [page, setPage] = useState(1);
-  const count = Math.ceil(flowers.length / 3); // количество продуктов на одной странице
+  const count = Math.ceil(flowers.length / 3);
 
   useEffect(() => {
-    getFlower(); //! for getting flowers from database
+    getFlower();
   }, []);
 
   useEffect(() => {
@@ -41,7 +41,6 @@ const FlowerList = () => {
     console.log(searchParams.toString());
   }, [search]);
 
-  // фильтр
   useEffect(() => {
     getFlower();
   }, [searchParams]);
@@ -59,10 +58,10 @@ const FlowerList = () => {
           <Pagination
             color="secondary"
             variant="outlined"
-            count={count} // суммарное количество страниц
+            count={count}
             shape="rounded"
-            page={page} // страница на которой находимся
-            onChange={(e, p) => setPage(p)} // атрибут p = page
+            page={page}
+            onChange={(e, p) => setPage(p)}
           />
         </Box>
       </Grid>
@@ -76,8 +75,6 @@ const FlowerList = () => {
           Categories
         </Typography>
       </Box>
-
-      {/* фильтр */}
 
       <FormControl>
         <RadioGroup

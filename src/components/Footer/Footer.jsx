@@ -71,7 +71,7 @@ const Footer = () => {
             }}
           >
             <Typography variant="caption" color="#284853">
-              Copyright ©2022.
+              Copyright ©2023.
             </Typography>
           </Box>
         </Container>

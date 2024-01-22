@@ -18,7 +18,7 @@ const AddFlowers = () => {
   const [open, setOpen] = useState(false);
   const [flower, setFlower] = useState({
     image:
-      "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7XIBztGVYdREcYU-CsxRPghUgsxpkJJH7Qg7Pdmq3Bfncx17T0aBTds3Bs2pCaZmwMk&usqp=CAU",
     title: "",
     price: "",
     description: "--",
@@ -77,7 +77,7 @@ const AddFlowers = () => {
     }
   };
 
-  const sizes = ["SX", "S", "M", "L", "XL", "XXL"];
+  const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
   const categories = [
     "FERN",
     "CACTUS",

@@ -1,0 +1,15 @@
+/* .not {
+  background-image: url("../images/bgLog.jpeg");
+  height: 500px;
+  width: 100%;
+  background-color: blacks;
+  background-repeat: no-repeat;
+  background-size: COVER;
+} */
+.not {
+  background-image: url("https://t3.ftcdn.net/jpg/01/13/46/88/360_F_113468872_HIQ5bYXEpeqN01ZXCvsnzVEQCU7mUY7c.jpg");
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 100%;
+  background-position: center;
+}

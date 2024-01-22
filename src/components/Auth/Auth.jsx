@@ -49,11 +49,11 @@ const Auth = () => {
   return (
     <div className="auz">
       <Container className="leftSide">
-        <img
+        {/* <img
           className="image"
           src={list}
           style={{ width: "100%", height: "50%" }}
-        />
+        /> */}
         <h1 className="welcome image">Welcome to the ALKI</h1>
         <h3 className="welcome-1 image">Art of Plants</h3>
       </Container>

@@ -1,20 +1,9 @@
 {
   "flowers": [
     {
-      "image": "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_sansevieria_charcoal-e1633460982733.jpg?ver=279439",
-      "title": "Sansevieria",
-      "price": 950,
-      "description": "Architectural and sturdy, this plant is easy to care for and highly adaptable. Also known as a Snake Plant and Mother-in-Law’s Tongue.",
-      "size": "",
-      "colors": "grey",
-      "undefined": 0,
-      "id": 2,
-      "category": "CACTUS"
-    },
-    {
       "image": "https://bloomscape.com/wp-content/uploads/2023/01/CF_C021_R-324x389.jpg?ver=997067",
-      "title": "DDDDDDDDDDDDDDD",
-      "price": 78452,
+      "title": "Spily",
+      "price": 117,
       "description": "gvhjkl",
       "size": "L",
       "colors": "grey",
@@ -23,134 +12,84 @@
       "category": "SUCCULENT"
     },
     {
-      "image": "hsdjfkg",
-      "title": "gasdufio",
-      "price": 8451,
-      "description": "afsdgu",
-      "size": "XL",
-      "categories": "ghjk",
-      "colors": "grey",
-      "id": 9
-    },
-    {
-      "image": "",
-      "title": "",
-      "price": 0,
+      "image": "https://bloomscape.com/wp-content/uploads/2022/08/bloomscape_money-tree-braid_md_clay-324x389.jpg?ver=927166",
+      "title": "money tree",
+      "price": 250,
       "description": "",
       "size": "XL",
-      "categories": "",
       "colors": "grey",
-      "id": 10
+      "id": 9,
+      "category": "FERN"
     },
     {
-      "image": "",
-      "title": "",
-      "price": 0,
+      "image": "https://bloomscape.com/wp-content/uploads/2023/01/CF_2184_R-324x389.jpg?ver=997064",
+      "title": "Hoya Heart",
+      "price": 35,
       "description": "",
-      "size": "",
-      "categories": "",
+      "size": "S",
       "colors": "grey",
-      "id": 11
+      "id": 10,
+      "category": "CACTUS"
     },
     {
-      "image": "ghesdjfgh",
-      "title": "Kkkkk",
-      "price": 745,
-      "description": "yedufigo",
-      "size": "XXL",
-      "categories": "gwerufig",
+      "image": "https://bloomscape.com/wp-content/uploads/2023/01/BLOOMSCAPE_Bromeliad_RED_EDIT_2103-324x389.jpg?ver=999190",
+      "title": "Bromeliad",
+      "price": 55,
+      "description": "",
+      "size": "M",
       "colors": "grey",
-      "id": 12
+      "id": 11,
+      "category": "WATER"
     },
     {
-      "image": "hsdjfgk",
-      "title": "HHHHH",
-      "price": 845,
-      "description": "jjjj",
-      "size": "XXL",
-      "category": "FRUIT",
+      "image": "https://bloomscape.com/wp-content/uploads/2022/06/bloomscape_cat-palm_xxl_charcoal-324x389.jpg?ver=902621",
+      "title": "Cat Palm",
+      "price": 200,
+      "description": "",
+      "size": "L",
+      "colors": "grey",
+      "id": 12,
+      "category": "SUCCULENT"
+    },
+    {
+      "image": "https://bloomscape.com/wp-content/uploads/2022/05/bloomscape_stromanthe_triostar_large_stone-324x389.jpg?ver=790823",
+      "title": "Triostar",
+      "price": 79,
+      "description": "",
+      "size": "XS",
+      "category": "BERRIES",
       "colors": "grey",
       "id": 13
     },
     {
-      "image": "sdf",
-      "title": "WQWQW",
-      "price": 123,
-      "description": "dfhjg",
-      "size": "SX",
+      "image": "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_bird-of-paradise_indigo-1-e1652801552558-324x390.jpg?ver=279696",
+      "title": "Bird of Paradise",
+      "price": 199,
+      "description": "",
+      "size": "S",
       "category": "SUCCULENT",
       "colors": "grey",
       "id": 14
     },
     {
-      "image": "q",
-      "title": "ASASASAS",
-      "price": 88,
-      "description": "fgh",
-      "size": "S",
-      "category": "CACTUS",
+      "image": "https://bloomscape.com/wp-content/uploads/2022/08/bloomscape_schefflera-varigated_lg_slate-324x389.jpg?ver=927237",
+      "title": "Schellfiera",
+      "price": 350,
+      "description": "",
+      "size": "M",
+      "category": "FRUIT",
       "colors": "grey",
       "id": 15
     },
     {
-      "image": "",
-      "title": "dgdgdgdgdg",
-      "price": 0,
-      "description": "--",
-      "size": "--",
+      "image": "https://bloomscape.com/wp-content/uploads/2023/01/CF_2049_R-1-324x389.jpg?ver=997078",
+      "title": "Prayer",
+      "price": 410,
+      "description": "",
+      "size": "S",
       "category": "--",
       "colors": "grey",
       "id": 16
-    },
-    {
-      "image": "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
-      "title": "hhhh",
-      "price": 555,
-      "description": "--",
-      "size": "--",
-      "category": "--",
-      "colors": "grey",
-      "id": 17
-    },
-    {
-      "image": "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
-      "title": "new1",
-      "price": 2,
-      "description": "--",
-      "size": "--",
-      "category": "--",
-      "colors": "grey",
-      "id": 18
-    },
-    {
-      "image": "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
-      "title": "new2",
-      "price": 10,
-      "description": "--",
-      "size": "--",
-      "category": "--",
-      "colors": "grey",
-      "id": 19
-    },
-    {
-      "image": "https://image.shutterstock.com/image-vector/plant-hand-vector-icon-260nw-725756275.jpg",
-      "title": "new3",
-      "price": 20,
-      "description": "--",
-      "size": "--",
-      "category": "--",
-      "colors": "grey",
-      "id": 20
-    },
-    {
-      "image": "asd",
-      "title": "",
-      "price": 0,
-      "description": "--",
-      "size": "--",
-      "category": "--",
-      "colors": "grey",
-      "id": 21
     },
     {
       "image": "https://bloomscape.com/wp-content/uploads/2022/10/bloomscape_peace-lily6_md_angle2-324x389.jpg?ver=955365",
@@ -161,6 +100,26 @@
       "category": "FERN",
       "colors": "grey",
       "id": 22
+    },
+    {
+      "image": "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_prickly-pear-cactus_charcoal-e1625250902451-324x388.jpg?ver=279300",
+      "title": "Prickly",
+      "price": 360,
+      "description": "--",
+      "size": "XS",
+      "category": "CACTUS",
+      "colors": "grey",
+      "id": 23
+    },
+    {
+      "image": "https://bloomscape.com/wp-content/uploads/2021/12/Bloomscape_Jade_small_charcoal_Angle2-scaled-e1640212012283-324x405.jpg?ver=639513",
+      "title": "Jade",
+      "price": 115,
+      "description": "--",
+      "size": "M",
+      "category": "BERRIES",
+      "colors": "grey",
+      "id": 24
     }
   ]
 }

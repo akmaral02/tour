@@ -1,8 +1,11 @@
 .auz {
   display: flex;
-  margin-top: -5%;
-  margin-left: -10%;
+  /* margin-top: -5%; */
+  margin-left: 50px;
   /* height: 800px; */
+  background: url("../images/Login.jpeg") no-repeat;
+  background-size: contain;
+  z-index: 2;
 }
 
 /* .leftside {
@@ -21,14 +24,15 @@
 }
 
 .welcome {
-  margin-top: -49%;
-  margin-left: 40%;
-  color: #284853;
+  margin-top: 25%;
+  margin-left: 20%;
+  color: white;
+  z-index: 1;
 }
 .welcome-1 {
   /* margin-top: -49%; */
-  margin-left: 40%;
-  color: #284853;
+  margin-left: 20%;
+  color: white;
 }
 
 .image {
